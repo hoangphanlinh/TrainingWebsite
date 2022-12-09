@@ -1,0 +1,39 @@
+﻿@model TrainingWebsite.Areas.Trainer.Models.CreateTopicViewModel
+@{
+    ViewData["Title"] = "CreateTopic";
+    Layout = "~/Areas/Trainer/Views/Shared/_TrainerLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <nav>
+        <h2>Create Session</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Course")">Course</a></li>
+            <li class="breadcrumb-item">Course List</li>
+            <li class="breadcrumb-item">Create Session</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="IDKhoaHoc">Khoa Hoc ID</label>
+        <input type="text" class="form-control" id="inputEmail4" asp-for="@ViewData["ID"]" disabled>
+    </div>
+    <br/>
+    <div class="form-group">
+        <label asp-for="TenChuDe">Ten Chu De</label>
+        <input type="text" asp-for="TenChuDe" class="form-control" id="inputAddress" placeholder="Ten Chu De...">
+        <span asp-validation-for="TenChuDe" class="text-danger"></span>
+    </div>
+    <br/>
+    <div class="form-group">
+        <label>Noi Dung</label>
+        <input type="file" asp-for="BaiGiangVideo"  class="form-control">
+        <span asp-validation-for="BaiGiangVideo" class="text-danger"></span>
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+

@@ -1,0 +1,143 @@
+﻿@model ContactFormModel
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/assets/styles/contact.css">
+<link rel="stylesheet" type="text/css" href="~/assets/styles/contact_responsive.css">
+<!-- Home -->
+
+<div class="home">
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li>Contact</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact">
+
+
+
+
+    <!-- Contact Info -->
+
+    <div class="contact_info_container">
+        <div class="container">
+            <div class="row">
+
+                <!-- Contact Form -->
+                <div class="col-lg-6">
+                    <div class="contact_form">
+                        <div class="contact_info_title">Contact Form</div>
+                        <form method="post" class="comment_form">
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    @ViewBag.Message
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            }
+                            <div>
+                                <div class="form_title">Name</div>
+                                <input type="text" class="comment_input" asp-for="@Model.Name">
+                                <span class="text-dark" asp-validation-for="@Model.Name"></span>
+                            </div>
+                            <div>
+                                <div class="form_title">Email</div>
+                                <input type="text" class="comment_input" asp-for="@Model.Email">
+                                <span class="text-dark" asp-validation-for="@Model.Email"></span>
+                            </div>
+                            <div>
+                                <div class="form_title">Subject</div>
+                                <input type="text" class="comment_input" asp-for="@Model.Subject">
+                                <span class="text-dark" asp-validation-for="@Model.Subject"></span>
+                            </div>
+                            <div>
+                                <div class="form_title">Message</div>
+                                <textarea class="comment_input comment_textarea" asp-for="@Model.Message"></textarea>
+                                <span class="text-dark" asp-validation-for="@Model.Message"></span>
+
+                            </div>
+                            <div>
+                                <button type="submit" class="comment_button trans_200">Send</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-6">
+                    <div class="contact_info">
+                        <div class="contact_info_title">Contact Info</div>
+                        <div class="contact_info_text">
+                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters.</p>
+                        </div>
+                        <div class="contact_info_location">
+                            <div class="contact_info_location_title">New York Office</div>
+                            <ul class="location_list">
+                                <li>Ho Chi Minh City</li>
+                                <li>1-234-567-89011</li>
+                                <li>info.deercreative@gmail.com</li>
+                            </ul>
+                        </div>
+                        @*<div class="contact_info_location">
+                                <div class="contact_info_location_title">Australia Office</div>
+                                <ul class="location_list">
+                                    <li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
+                                    <li>1-234-567-89011</li>
+                                    <li>info.deercreative@gmail.com</li>
+                                </ul>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter -->
+
+<div class="newsletter">
+    <div class="newsletter_background" style="background-image:url(../../assets/images/newsletter_background.jpg)"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
+
+                    <!-- Newsletter Content -->
+                    <div class="newsletter_content text-lg-left text-center">
+                        <div class="newsletter_title">sign up for news and offers</div>
+                        <div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
+                    </div>
+
+                    <!-- Newsletter Form -->
+                    <div class="newsletter_form_container ml-lg-auto">
+                        <form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
+                            <input type="email" class="newsletter_input" placeholder="Your Email" required="required">
+                            <button type="submit" class="newsletter_button">subscribe</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+<script src="~/assets/plugins/marker_with_label/marker_with_label.js"></script>
+<script src="~/assets/js/contact.js"></script>
+

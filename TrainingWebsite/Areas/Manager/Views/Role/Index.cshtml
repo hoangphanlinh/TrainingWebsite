@@ -1,0 +1,65 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_ManagerLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>All Roles</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item active">All Roles</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+@if (Model.Any())
+{
+    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
+       asp-controller="Role">Add new role</a>
+   
+    foreach (var role in Model)
+    {
+
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id : @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+            </div>
+            <div class="card-footer">
+                <form asp-action="DeleteRole" asp-route-id="@role.Id">
+                    <a asp-controller="Role" asp-action="EditRole"
+                       asp-route-id="@role.Id" class="btn btn-primary">
+                        Edit
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+
+                </form>
+
+
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No roles created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a role
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="Role" asp-action="CreateRole">
+                Create Role
+            </a>
+        </div>
+    </div>
+}
+

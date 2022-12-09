@@ -1,0 +1,58 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+   
+
+}
+<link rel="stylesheet" type="text/css" href="~/assets/styles/contact.css">
+<link rel="stylesheet" type="text/css" href="~/assets/styles/contact_responsive.css">
+
+<div class="home">
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li>Manage Setting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact">
+    <div class="contact_info_container">
+        <div class="container">
+            <h2>Manage your account</h2>
+            <br /><br />
+            <h4>Change your account settings</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+<script src="~/assets/plugins/marker_with_label/marker_with_label.js"></script>
+<script src="~/assets/js/contact.js"></script>
+

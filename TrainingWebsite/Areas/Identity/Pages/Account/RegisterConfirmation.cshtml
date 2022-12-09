@@ -1,0 +1,52 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<link rel="stylesheet" type="text/css" href="~/assets/styles/contact.css">
+<link rel="stylesheet" type="text/css" href="~/assets/styles/contact_responsive.css">
+
+<div class="home">
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs">
+                        <ul>
+                            @*<li><a href="#">Register</a></li>
+                            <li>Register Confirm</li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact">
+    <div class="contact_info_container">
+        <div class="container text-center">
+            @{
+                if (@Model.DisplayConfirmAccountLink)
+                {
+                    <p>
+                        This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
+                        Normally this would be emailed:
+                    </p>
+                    <a id="confirm-link" class="btn btn-primary"  href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+                }
+                else
+                {
+                    <p>
+                        Please check your email to confirm your account.
+                    </p>
+                }
+            }
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+<script src="~/assets/plugins/marker_with_label/marker_with_label.js"></script>
+<script src="~/assets/js/contact.js"></script>
+

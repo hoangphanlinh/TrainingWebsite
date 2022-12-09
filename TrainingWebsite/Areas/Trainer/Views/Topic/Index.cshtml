@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TrainingWebsite.Areas.Trainer.Models.SessionListViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Trainer/Views/Shared/_TrainerLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <nav>
+        <h3>@ViewBag.courseName</h3>
+        <ol class="breadcrumb"> 
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Course")">Course</a></li>
+            <li class="breadcrumb-item active">Session List </li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+    @if (Model.Any())
+    {
+        <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateTopic" asp-route-id="@ViewBag.sessionID"
+           asp-controller="Topic">Add Session</a>
+
+        foreach (var session in Model)
+        {
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    Session Id : @session.ID
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@session.TenChuDe</h5>
+                </div>
+                <div class="card-footer">
+                    <form asp-action="DeleteRole" asp-route-id="@*@role.Id*@">
+                        <a asp-controller="Role" asp-action="EditRole"
+                           asp-route-id="@*@role.Id*@" class="btn btn-primary">
+                            Edit
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            Delete
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                No session created yet
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Use the button below to create a session
+                </h5>
+                <a class="btn btn-primary" style="width:auto"
+                   asp-controller="Topic" asp-action="CreateTopic" asp-route-id="@ViewBag.sessionID">
+                    Create Session
+                </a>
+            </div>
+        </div>
+    }

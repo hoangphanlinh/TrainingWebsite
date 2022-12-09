@@ -1,0 +1,83 @@
+﻿@model TrainingWebsite.Areas.Trainer.Models.CreateCourseViewModel
+@{
+    ViewData["Title"] = "AddCourse";
+    Layout = "~/Areas/Trainer/Views/Shared/_TrainerLayout.cshtml";
+}
+<link href="~/assets_areas/css/sb-admin-2.min.css" rel="stylesheet" />
+<script src="~/assets_areas/js/sb-admin-2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="pagetitle">
+    <nav>
+        <h2>Create Course</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Course")">Course</a></li>
+            <li class="breadcrumb-item">Course List</li>
+            <li class="breadcrumb-item">Create Course</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="IDTrainer">ID Trainer</label>
+        <input type="text" class="form-control" id="inputEmail4" asp-for="@ViewData["TrainerId"]" disabled>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="MaKhoaHoc">Ma Khoa Hoc</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Ma Khoa Hoc" asp-for="MaKhoaHoc">
+            <span asp-validation-for="MaKhoaHoc" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="TenKhoaHoc">Ten Khoa Hoc</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Ten Khoa Hoc" asp-for="TenKhoaHoc">
+            <span asp-validation-for="TenKhoaHoc" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="ThoiLuongKhoaHoc">Thoi Luong Khoa Hoc</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Thoi Luong Khoa Hoc" asp-for="ThoiLuongKhoaHoc">
+            <span asp-validation-for="ThoiLuongKhoaHoc" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="IDKhoaHocTienQuyet">Ten Khoa Hoc Tien Quyet</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Khoa Hoc Tien Quyet" asp-for="IDKhoaHocTienQuyet">
+            <span asp-validation-for="IDKhoaHocTienQuyet" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Image of Trainer</label>
+        <input type="file" asp-for="Photo" class="form-control" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IDJobPos">Vi tri cong viec</label>
+        <select asp-for="IDJobPos" class="form-control" asp-items="ViewBag.ListOfOccuption">
+        </select>
+        <span asp-validation-for="IDJobPos" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MucTieuKhoaHoc">Muc Tieu Khoa Hoc</label>
+        <textarea type="text" asp-for="MucTieuKhoaHoc" class="form-control" id="inputAddress" placeholder="Muc Tieu..."></textarea>
+        <span asp-validation-for="MucTieuKhoaHoc" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HinhThucDanhGia">Hinh Thuc Danh Gia</label>
+        <textarea type="text" asp-for="HinhThucDanhGia" class="form-control" id="inputAddress" placeholder="Hinh Thuc..."></textarea>
+        <span asp-validation-for="HinhThucDanhGia" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
