@@ -12,8 +12,8 @@ namespace TrainingWebsite.Areas.Identity.Data
 {
     public class ApplicationUser : IdentityUser
     {
-        
-       
+
+
 
         [PersonalData]
         public string FullName { get; set; }
@@ -26,15 +26,15 @@ namespace TrainingWebsite.Areas.Identity.Data
 
         [PersonalData]
         [ForeignKey("Occuption")]
-        
+
         public Nullable<int> OccuptionID { get; set; }
         public Occuption Occuption { get; set; }
 
         [PersonalData]
         [ForeignKey("Level")]
-        public Nullable<int> LevelID { get; set; } 
+        public Nullable<int> LevelID { get; set; }
         public Level Level { get; set; }
-       
+
 
 
     }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrainingWebsite.Migrations
 {
-    public partial class CreateIdentityschema : Migration
+    public partial class CreateIdentitySchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -107,6 +107,10 @@ namespace TrainingWebsite.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
                     OccuptionID = table.Column<int>(nullable: true),
                     LevelID = table.Column<int>(nullable: true)
                 },
@@ -212,6 +216,66 @@ namespace TrainingWebsite.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaKhoaHoc = table.Column<string>(nullable: true),
+                    TenKhoaHoc = table.Column<string>(nullable: true),
+                    ThoiLuongKhoaHoc = table.Column<int>(nullable: false),
+                    MucTieuKhoaHoc = table.Column<string>(nullable: true),
+                    HinhThucDanhGia = table.Column<string>(nullable: true),
+                    IDKhoaHocTienQuyet = table.Column<int>(nullable: true),
+                    IDTrainer = table.Column<string>(nullable: true),
+                    ImageTrainer = table.Column<string>(nullable: true),
+                    IDJobPos = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Courses_Occuptions_IDJobPos",
+                        column: x => x.IDJobPos,
+                        principalTable: "Occuptions",
+                        principalColumn: "OccuptionID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Courses_Courses_IDKhoaHocTienQuyet",
+                        column: x => x.IDKhoaHocTienQuyet,
+                        principalTable: "Courses",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Courses_AspNetUsers_IDTrainer",
+                        column: x => x.IDTrainer,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Topic",
+                columns: table => new
+                {
+                    IDChuDe = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenChuDe = table.Column<string>(nullable: true),
+                    NoiDung = table.Column<string>(nullable: true),
+                    IDKhoaHoc = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Topic", x => x.IDChuDe);
+                    table.ForeignKey(
+                        name: "FK_Topic_Courses_IDKhoaHoc",
+                        column: x => x.IDKhoaHoc,
+                        principalTable: "Courses",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -262,9 +326,29 @@ namespace TrainingWebsite.Migrations
                 column: "OccuptionID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Courses_IDJobPos",
+                table: "Courses",
+                column: "IDJobPos");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_IDKhoaHocTienQuyet",
+                table: "Courses",
+                column: "IDKhoaHocTienQuyet");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_IDTrainer",
+                table: "Courses",
+                column: "IDTrainer");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Occuptions_ApartmentID",
                 table: "Occuptions",
                 column: "ApartmentID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Topic_IDKhoaHoc",
+                table: "Topic",
+                column: "IDKhoaHoc");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -285,7 +369,13 @@ namespace TrainingWebsite.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Topic");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

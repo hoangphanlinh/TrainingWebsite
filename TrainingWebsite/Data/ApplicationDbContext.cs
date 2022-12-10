@@ -20,7 +20,7 @@ namespace TrainingWebsite.Data
         public DbSet<Level> Levels { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<ChuDe> Topic { get; set; }
-       
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

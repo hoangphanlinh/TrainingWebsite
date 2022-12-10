@@ -10,8 +10,8 @@ using TrainingWebsite.Data;
 namespace TrainingWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221130163407_CreateIdentityschema")]
-    partial class CreateIdentityschema
+    [Migration("20221210050416_CreateIdentitySchema")]
+    partial class CreateIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -164,6 +164,12 @@ namespace TrainingWebsite.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -174,6 +180,12 @@ namespace TrainingWebsite.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int?>("LevelID")
                         .HasColumnType("int");
@@ -244,6 +256,74 @@ namespace TrainingWebsite.Migrations
                     b.HasKey("ApartmentID");
 
                     b.ToTable("Apartments");
+                });
+
+            modelBuilder.Entity("TrainingWebsite.Models.ChuDe", b =>
+                {
+                    b.Property<int>("IDChuDe")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IDKhoaHoc")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenChuDe")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IDChuDe");
+
+                    b.HasIndex("IDKhoaHoc");
+
+                    b.ToTable("Topic");
+                });
+
+            modelBuilder.Entity("TrainingWebsite.Models.Course", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HinhThucDanhGia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IDJobPos")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IDKhoaHocTienQuyet")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IDTrainer")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ImageTrainer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaKhoaHoc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MucTieuKhoaHoc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenKhoaHoc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ThoiLuongKhoaHoc")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("IDJobPos");
+
+                    b.HasIndex("IDKhoaHocTienQuyet");
+
+                    b.HasIndex("IDTrainer");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("TrainingWebsite.Models.Level", b =>
@@ -341,6 +421,32 @@ namespace TrainingWebsite.Migrations
                     b.HasOne("TrainingWebsite.Models.Occuption", "Occuption")
                         .WithMany("AspNetUsers")
                         .HasForeignKey("OccuptionID");
+                });
+
+            modelBuilder.Entity("TrainingWebsite.Models.ChuDe", b =>
+                {
+                    b.HasOne("TrainingWebsite.Models.Course", "course")
+                        .WithMany()
+                        .HasForeignKey("IDKhoaHoc")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TrainingWebsite.Models.Course", b =>
+                {
+                    b.HasOne("TrainingWebsite.Models.Occuption", "JobPos")
+                        .WithMany()
+                        .HasForeignKey("IDJobPos")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TrainingWebsite.Models.Course", "Course2")
+                        .WithMany("Course1")
+                        .HasForeignKey("IDKhoaHocTienQuyet");
+
+                    b.HasOne("TrainingWebsite.Areas.Identity.Data.ApplicationUser", "Trainer")
+                        .WithMany()
+                        .HasForeignKey("IDTrainer");
                 });
 
             modelBuilder.Entity("TrainingWebsite.Models.Occuption", b =>

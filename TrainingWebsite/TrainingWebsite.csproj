@@ -64,6 +64,8 @@
     <Compile Remove="Migrations\20221130110939_CreateIdentitySchema.Designer.cs" />
     <Compile Remove="Migrations\20221130111321_ApplyUser.cs" />
     <Compile Remove="Migrations\20221130111321_ApplyUser.Designer.cs" />
+    <Compile Remove="Migrations\20221130163407_CreateIdentityschema.cs" />
+    <Compile Remove="Migrations\20221130163407_CreateIdentityschema.Designer.cs" />
     <Compile Remove="Migrations\20221130165208_AddCloumnToAspNetUsers.cs" />
     <Compile Remove="Migrations\20221130165208_AddCloumnToAspNetUsers.Designer.cs" />
     <Compile Remove="Migrations\20221201144741_CreateTrainerTable.cs" />
@@ -92,8 +94,24 @@
     <Compile Remove="Migrations\20221206050732_Create Table Trainer.Designer.cs" />
     <Compile Remove="Migrations\20221206050918_Create Table Trainer.cs" />
     <Compile Remove="Migrations\20221206050918_Create Table Trainer.Designer.cs" />
+    <Compile Remove="Migrations\20221206052302_CreateTableTrainer.cs" />
+    <Compile Remove="Migrations\20221206052302_CreateTableTrainer.Designer.cs" />
     <Compile Remove="Migrations\20221206052447_delete.cs" />
     <Compile Remove="Migrations\20221206052447_delete.Designer.cs" />
+    <Compile Remove="Migrations\20221206052539_delete.cs" />
+    <Compile Remove="Migrations\20221206052539_delete.Designer.cs" />
+    <Compile Remove="Migrations\20221206140244_DeleteTableTrainer.cs" />
+    <Compile Remove="Migrations\20221206140244_DeleteTableTrainer.Designer.cs" />
+    <Compile Remove="Migrations\20221206142617_CreateTableCouse.cs" />
+    <Compile Remove="Migrations\20221206142617_CreateTableCouse.Designer.cs" />
+    <Compile Remove="Migrations\20221206150746_AddColume_ImageTrainer.cs" />
+    <Compile Remove="Migrations\20221206150746_AddColume_ImageTrainer.Designer.cs" />
+    <Compile Remove="Migrations\20221207053753_ChangeByte-sTRING.cs" />
+    <Compile Remove="Migrations\20221207053753_ChangeByte-sTRING.Designer.cs" />
+    <Compile Remove="Migrations\20221208015234_CreateTable_ChuDe.cs" />
+    <Compile Remove="Migrations\20221208015234_CreateTable_ChuDe.Designer.cs" />
+    <Compile Remove="Migrations\20221208015618_AddCol_TenChuDe.cs" />
+    <Compile Remove="Migrations\20221208015618_AddCol_TenChuDe.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -120,6 +138,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Trainer\Data\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\Video\" />
   </ItemGroup>
