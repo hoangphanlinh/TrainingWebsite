@@ -27,12 +27,12 @@ namespace TrainingWebsite.Areas.Identity.Data
         [PersonalData]
         [ForeignKey("Occuption")]
 
-        public Nullable<int> OccuptionID { get; set; }
+        public Nullable<int> OccuptionID { get; set; } = 24;
         public Occuption Occuption { get; set; }
 
         [PersonalData]
         [ForeignKey("Level")]
-        public Nullable<int> LevelID { get; set; }
+        public Nullable<int> LevelID { get; set; } = 8;
         public Level Level { get; set; }
 
 
