@@ -138,6 +138,60 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             return RedirectToAction("Index", "Topic", new { id = topic.IDKhoaHoc});
 
         }
-        public 
+        public async Task<IActionResult> EditTopic(int id)
+        {
+            var topic = await data.Topic.SingleOrDefaultAsync(m => m.IDChuDe == id);
+            ViewBag.ID = topic.IDKhoaHoc;
+
+            if (topic == null)
+            {
+                return NotFound();
+            }
+            return View(topic);
+
+        }
+        [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 104857600)] //Gioi han file tai len 50MB
+        public async Task<IActionResult> EditTopic(int id, ChuDe chuDe)
+        {
+            var topic = await data.Topic.SingleOrDefaultAsync(m => m.IDChuDe == id);
+
+            if (ModelState.IsValid)
+            {
+                string uniuefilename = string.Empty;
+
+                //Tai file tu server
+                var files = HttpContext.Request.Form.Files;
+
+                foreach (var video in files)
+                {
+                    if (video != null && video.Length > 0)
+                    {
+                        var file = video;
+
+                        var uploads = Path.Combine(WebHostEnvironment.WebRootPath, "Video");
+                        if (file.Length > 0)
+                        {
+                            // var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName); // tao ten file
+                            var fileName = Guid.NewGuid().ToString().Replace("-", "") + file.FileName;
+                            using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
+                            {
+                                await file.CopyToAsync(fileStream);
+                                uniuefilename = fileName;
+                            }
+
+                        }
+                    }
+                }
+                topic.TenChuDe = chuDe.TenChuDe;
+                topic.NoiDung = uniuefilename;
+                await data.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Topic", new { id = topic.IDKhoaHoc });
+
+            }
+            return View();
+
+        }
     }
 }
