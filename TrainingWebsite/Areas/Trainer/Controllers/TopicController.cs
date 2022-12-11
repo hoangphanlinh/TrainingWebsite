@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using TrainingWebsite.Areas.Trainer.Models;
 using TrainingWebsite.Data;
 using TrainingWebsite.Models;
@@ -35,7 +36,9 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                            select new SessionListViewModel
                            {
                                ID = s.IDChuDe,
-                               TenChuDe = s.TenChuDe
+                               TenChuDe = s.TenChuDe,
+                               NoiDung = s.NoiDung
+                               
                            }).ToList();
 
             return View(session);
@@ -48,7 +51,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             return View();
         }
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 104857600)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 104857600)] //Gioi han file tai len 50MB
         public async Task<IActionResult> CreateTopic(CreateTopicViewModel model,int id)
         {
             try
@@ -59,18 +62,19 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                 {
                     string uniuefilename = string.Empty;
 
+                    //Tai file tu server
                     var files = HttpContext.Request.Form.Files;
 
-                    foreach (var Image in files)
+                    foreach (var video in files)
                     {
-                        if (Image != null && Image.Length > 0)
+                        if (video != null && video.Length > 0)
                         {
-                            var file = Image;
+                            var file = video;
 
                             var uploads = Path.Combine(WebHostEnvironment.WebRootPath, "Video");
                             if (file.Length > 0)
                             {
-                                // var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                                // var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName); // tao ten file
                                 var fileName = Guid.NewGuid().ToString().Replace("-", "") + file.FileName;
                                 using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                                 {
@@ -81,19 +85,43 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                             }
                         }
                     }
+
+                    ////Xu ly copy link youtube tu thanh dia chi
+
+                    //var videoUrl = new Uri(model.NoiDung);
+                    //    var videoID = HttpUtility.ParseQueryString(videoUrl.Query).Get("v");
+
+
+                    //    var chude = new ChuDe()
+                    //    {
+
+                    //        NoiDung = videoID,
+                    //        IDKhoaHoc = id,
+                    //        TenChuDe = model.TenChuDe,
+                    //    };
+
+                    //    data.Topic.Add(chude);
+                    //    await data.SaveChangesAsync();
+
+                    //    return RedirectToAction("Index", "Topic", new { id = id });
+
+
+
                     var chude = new ChuDe()
                     {
+
                         NoiDung = uniuefilename,
                         IDKhoaHoc = id,
                         TenChuDe = model.TenChuDe,
-        
-                       
                     };
+
                     data.Topic.Add(chude);
                     await data.SaveChangesAsync();
+
                     return RedirectToAction("Index", "Topic", new { id = id });
+
                 }
-              
+
             }
             catch(Exception ex)
             {
@@ -101,5 +129,15 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             }
             return View(model);
         }
+        public async Task<IActionResult> DeleteTopic(int id)
+        {
+
+            var topic = await data.Topic.SingleOrDefaultAsync(m => m.IDChuDe == id);
+            data.Topic.Remove(topic);
+            await data.SaveChangesAsync();
+            return RedirectToAction("Index", "Topic", new { id = topic.IDKhoaHoc});
+
+        }
+        public 
     }
 }

@@ -12,6 +12,7 @@ namespace TrainingWebsite.Areas.Trainer.Models
         public int ID { get; set; }
        
         public string TenChuDe { get; set; }
+        public string NoiDung { get; set; }
       
     }
     public class CreateTopicViewModel
@@ -19,9 +20,10 @@ namespace TrainingWebsite.Areas.Trainer.Models
         public int ID { get; set; }
         [Required]
         public string TenChuDe { get; set; }
-        [Required]
         public string NoiDung { get; set; }
         public int IDKhoaHoc { get; set;  }
         public IFormFile BaiGiangVideo { get; set; }
+
+        public string type { get; set; }
     }
 }

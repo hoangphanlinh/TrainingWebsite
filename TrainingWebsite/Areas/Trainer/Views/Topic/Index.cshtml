@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Trainer/Views/Shared/_TrainerLayout.cshtml";
+    
 }
 
 <div class="pagetitle">
@@ -28,11 +29,20 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">@session.TenChuDe</h5>
+                   
+                        <video id="videoplayer" style="width:600px;height:300px; object-fit:cover" src="@Url.Content("~/Video/" + @session.NoiDung)" controls loop></video>
+
+                         @*<iframe width="560" height="315" src="https://www.youtube.com/embed/@session.NoiDung" title="YouTube video player" 
+                                 frameborder="0" 
+                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                 allowfullscreen></iframe>*@
+
+                    
                 </div>
                 <div class="card-footer">
-                    <form asp-action="DeleteRole" asp-route-id="@*@role.Id*@">
-                        <a asp-controller="Role" asp-action="EditRole"
-                           asp-route-id="@*@role.Id*@" class="btn btn-primary">
+                    <form asp-action="DeleteTopic" asp-route-id="@session.ID">
+                        <a asp-controller="Topic" asp-action="EditTopic"
+                           asp-route-id="@session.ID" class="btn btn-primary">
                             Edit
                         </a>
                         <button type="submit" class="btn btn-danger">
