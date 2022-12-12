@@ -9,7 +9,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using TrainingWebsite.Areas.Identity.Data;
+using TrainingWebsite.Data;
 using TrainingWebsite.Models;
+using TrainingWebsite.ViewModels;
 
 namespace TrainingWebsite.Controllers
 {
@@ -18,21 +21,30 @@ namespace TrainingWebsite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IConfiguration Configuration;
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        private ApplicationDbContext data;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, ApplicationDbContext data)
         {
             _logger = logger;
             this.Configuration = configuration;
+            this.data = data;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var course = (from s in data.Courses
+                          join t in data.Users on s.IDTrainer equals t.Id
+                          select new CourseHomeViewModel
+                          {
+                              Image = s.ImageTrainer,
+                              TrainerName = t.FullName,
+                              TenKhoaHoc = s.TenKhoaHoc
+
+                          }).ToList();
+                          
+            return View(course);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+      
         [HttpGet]
         public IActionResult Contact()
         {
