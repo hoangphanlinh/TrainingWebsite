@@ -31,6 +31,15 @@ namespace TrainingWebsite.Controllers
 
         public IActionResult Index()
         {
+           CourseViewModel course = new CourseViewModel();
+            course.Popular = GetCoursePopular();
+            course.Job = GetCourseDesign("Frontend");
+            course.Backend = GetCourseDesign("Backend");
+
+            return View(course);
+        }
+        public IEnumerable<CourseHomeViewModel> GetCoursePopular()
+        {
             var course = (from s in data.Courses
                           join t in data.Users on s.IDTrainer equals t.Id
                           select new CourseHomeViewModel
@@ -40,11 +49,25 @@ namespace TrainingWebsite.Controllers
                               TenKhoaHoc = s.TenKhoaHoc
 
                           }).ToList();
-                          
-            return View(course);
+            return course;
+        }
+        public IEnumerable<CourseJobViewModel> GetCourseDesign(string i)
+        {
+            var course = (from s in data.Courses
+                          join t in data.Users on s.IDTrainer equals t.Id
+                          join oc in data.Occuptions on s.IDJobPos equals oc.OccuptionID
+                          where oc.OccuptionName == i
+                          select new CourseJobViewModel
+                          {
+                              Image = s.ImageTrainer,
+                              TrainerName = t.Email,
+                              TenKhoaHoc = s.TenKhoaHoc,
+                              JobName = oc.OccuptionName
+                          }).ToList();
+            ViewBag.JobName = i;
+            return course;
         }
 
-      
         [HttpGet]
         public IActionResult Contact()
         {

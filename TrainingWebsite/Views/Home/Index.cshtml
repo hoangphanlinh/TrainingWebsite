@@ -1,12 +1,12 @@
-﻿@model List<TrainingWebsite.ViewModels.CourseHomeViewModel>
+﻿@model TrainingWebsite.ViewModels.CourseViewModel
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
-   
+
 }
 <style>
-    .card-img-top{
-        width:100%;
+    .card-img-top {
+        width: 100%;
         height: 25vh;
     }
 </style>
@@ -141,7 +141,7 @@
         <div class="row courses_row">
 
             <!-- Course -->
-            @foreach (var course in Model)
+            @foreach (var course in Model.Popular.Take(3))
             {
                 <div class="col-lg-4  mb-3 d-flex align-items-stretch">
                     <div class="course">
@@ -160,11 +160,16 @@
                                 <a href="#" class="btn btn-primary mt-auto align-center">Enroll</a>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             }
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="courses_button trans_200"><a href="#">view all courses</a></div>
             </div>
-            
+        </div>
+        <partial name="~/Views/Home/GetCourseDesign.cshtml" />
     </div>
 </div>
