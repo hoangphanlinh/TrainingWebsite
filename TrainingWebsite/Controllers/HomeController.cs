@@ -36,7 +36,7 @@ namespace TrainingWebsite.Controllers
                           select new CourseHomeViewModel
                           {
                               Image = s.ImageTrainer,
-                              TrainerName = t.FullName,
+                              TrainerName = t.Email,
                               TenKhoaHoc = s.TenKhoaHoc
 
                           }).ToList();

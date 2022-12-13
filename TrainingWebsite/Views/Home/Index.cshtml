@@ -2,12 +2,12 @@
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
+   
 }
 <style>
-    .card-img-top {
-        width: 100%;
+    .card-img-top{
+        width:100%;
         height: 25vh;
-        object-fit: cover;
     }
 </style>
 <!-- Counter -->
@@ -139,41 +139,32 @@
             </div>
         </div>
         <div class="row courses_row">
+
+            <!-- Course -->
             @foreach (var course in Model)
             {
-                <div class="col-lg-4 mb-3 d-flex align-items-stretch">
+                <div class="col-lg-4  mb-3 d-flex align-items-stretch">
                     <div class="course">
-                        <div class="course_image"><img src="@Url.Content("~/images/" + @course.Image)" class="card-img-top" alt="Card Image"></div>
+                        <div class="course_image"><img object-fit:cover" src="@Url.Content("~/images/" + course.Image)" class="card-img-top" alt=""></div>
                         <div class="course_body d-flex flex-column">
                             <h3 class="course_title"><a href="course.html">@course.TenKhoaHoc</a></h3>
                             <div class="course_teacher">@course.TrainerName</div>
-                            @*<div class="course_text">
-                                <p>@course.MucTieuKhoaHoc</p>
-                            </div>*@
                         </div>
                         <div class="course_footer">
                             <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
                                 <div class="course_info">
-                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                    <span>20 Student</span>
-                                </div>
-                                <div class="course_info">
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                     <span>5 Ratings</span>
                                 </div>
-                                <div class="course_price ml-auto">$130</div>
+                                <div></div>
+                                <a href="#" class="btn btn-primary mt-auto align-center">Enroll</a>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             }
             </div>
-        
-            <div class="row">
-                <div class="col">
-                    <div class="courses_button trans_200"><a href="#">view all courses</a></div>
-                </div>
-            </div>
-     </div>
+            
+    </div>
 </div>
-
