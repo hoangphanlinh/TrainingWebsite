@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -31,14 +32,10 @@ namespace TrainingWebsite.Controllers
 
         public IActionResult Index()
         {
-           CourseViewModel course = new CourseViewModel();
-            course.Popular = GetCoursePopular();
-            course.Job = GetCourseDesign("Frontend");
-            course.Backend = GetCourseDesign("Backend");
-
-            return View(course);
+            GetCoursePopular();
+            return View();
         }
-        public IEnumerable<CourseHomeViewModel> GetCoursePopular()
+        public IActionResult GetCoursePopular()
         {
             var course = (from s in data.Courses
                           join t in data.Users on s.IDTrainer equals t.Id
@@ -49,24 +46,12 @@ namespace TrainingWebsite.Controllers
                               TenKhoaHoc = s.TenKhoaHoc
 
                           }).ToList();
-            return course;
+            return View(course);
         }
-        public IEnumerable<CourseJobViewModel> GetCourseDesign(string i)
-        {
-            var course = (from s in data.Courses
-                          join t in data.Users on s.IDTrainer equals t.Id
-                          join oc in data.Occuptions on s.IDJobPos equals oc.OccuptionID
-                          where oc.OccuptionName == i
-                          select new CourseJobViewModel
-                          {
-                              Image = s.ImageTrainer,
-                              TrainerName = t.Email,
-                              TenKhoaHoc = s.TenKhoaHoc,
-                              JobName = oc.OccuptionName
-                          }).ToList();
-            ViewBag.JobName = i;
-            return course;
-        }
+       
+         
+        //Tim kiem khoa hoc
+    
 
         [HttpGet]
         public IActionResult Contact()

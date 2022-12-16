@@ -842,7 +842,7 @@ section
 {
 	margin-right: 19px;
 }
-.courses_search_select
+/*.courses_search_select
 {
 	position: relative;
 	-webkit-appearance: none;
@@ -856,7 +856,7 @@ section
 	background-position: center right;
 	background-repeat: no-repeat;
 	cursor: pointer;
-}
+}*/
 .courses_search_button
 {
 	width: 161px;

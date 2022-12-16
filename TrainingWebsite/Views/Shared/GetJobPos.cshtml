@@ -1,0 +1,14 @@
+﻿@using TrainingWebsite.Data
+@inject ApplicationDbContext data;
+<div class="dropdown">
+    <button class="dropbtn">
+        Dropdown
+    </button>
+        <div class="dropdown-content">
+            
+            @foreach(var a in data.Apartments)
+             { 
+                 <a asp-action="GetCourseByJobPos" asp-controller="Search" asp-route-id="@a.ApartmentID">@a.ApartmentName</a>
+             }
+        </div>
+</div>

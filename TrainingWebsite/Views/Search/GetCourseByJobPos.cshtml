@@ -1,8 +1,8 @@
-﻿@model List<TrainingWebsite.ViewModels.CourseHomeViewModel>
+﻿
+@model List<TrainingWebsite.ViewModels.CourseHomeViewModel>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "GetCourseByJobPos";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 <style>
     .card-img-top {
@@ -39,15 +39,13 @@
         </div>
     </div>
 </div>
-
-<!-- Popular Courses -->
 <div class="courses">
     <div class="section_background parallax-window" data-parallax="scroll" data-image-src="../../assets/images/courses_background.jpg" data-speed="0.8"></div>
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="section_title_container text-center">
-                    <h2 class="section_title">Popular Online Courses</h2>
+                    <h2 class="section_title">Result: @ViewBag.search</h2>
                 </div>
             </div>
         </div>
@@ -83,6 +81,5 @@
                 <div class="courses_button trans_200"><a href="#">view all courses</a></div>
             </div>
         </div>
-        @*<partial name="~/Views/Home/GetCourseDesign.cshtml" />*@
     </div>
 </div>

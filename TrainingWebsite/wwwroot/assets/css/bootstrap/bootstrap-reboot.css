@@ -109,7 +109,7 @@ a {
   background-color: transparent; }
   a:hover {
     color: #2417ff;
-    text-decoration: underline; }
+     }
 
 a:not([href]):not([tabindex]) {
   color: inherit;
