@@ -21,27 +21,30 @@ namespace TrainingWebsite.Controllers
             
             return View();
         }
-        public IActionResult GetCourseByJobPos(int searchString)
+        public IActionResult GetCourseByJobPos(int id)
         {
-            
+            var aprartName = data.Apartments.Where(x => x.ApartmentID == id).FirstOrDefault().ApartmentName;
+
             var course = (from c in data.Courses
                           join o in data.Occuptions on c.IDJobPos equals o.OccuptionID
-                          join a in data.Apartments on o.ApartmentID equals a.ApartmentID
                           join u in data.Users on c.IDTrainer equals u.Id
-                          where a.ApartmentID.Equals(searchString)
+                          where o.ApartmentID == id
                           select new CourseHomeViewModel
                           {
                               Image = c.ImageTrainer,
                               TrainerName = u.Email,
                               TenKhoaHoc = c.TenKhoaHoc
 
-                          }).ToList();
-            ViewBag.search = searchString;
+                          }).ToList(); ;
+            ViewBag.Name = aprartName;
             if (course == null)
             {
                 return NotFound();
             }
-            return View(course);
+            else
+            {
+                return View(course);
+            }
         }
     }
 }
