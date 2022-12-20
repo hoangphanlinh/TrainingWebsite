@@ -1,4 +1,4 @@
-﻿@model List<TrainingWebsite.ViewModels.CourseHomeViewModel>
+﻿@model List<TrainingWebsite.Models.Course>
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -58,10 +58,10 @@
 
                 <div class="col-lg-4  mb-3 d-flex align-items-stretch">
                     <div class="course">
-                        <div class="course_image"><img object-fit:cover" src="@Url.Content("~/images/" + course.Image)" class="card-img-top" alt=""></div>
+                        <div class="course_image"><img object-fit:cover" src="@Url.Content("~/images/" + course.ImageTrainer)" class="card-img-top" alt=""></div>
                         <div class="course_body d-flex flex-column">
                             <h3 class="course_title"><a href="course.html">@course.TenKhoaHoc</a></h3>
-                            <div class="course_teacher">@course.TrainerName</div>
+                            <div class="course_teacher">@course.IDTrainer</div>
                         </div>
                         <div class="course_footer">
                             <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">

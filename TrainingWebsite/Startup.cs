@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using TrainingWebsite.ViewModels;
 
 namespace TrainingWebsite
 {
@@ -43,7 +44,10 @@ namespace TrainingWebsite
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-  
+
+            services.AddScoped<ICourse, ItemCourse>();
+
+
 
             //services.AddIdentity<ApplicationUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();

@@ -22,36 +22,20 @@ namespace TrainingWebsite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IConfiguration Configuration;
-        private ApplicationDbContext data;
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, ApplicationDbContext data)
+        private readonly ICourse _course;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, ICourse course)
         {
             _logger = logger;
             this.Configuration = configuration;
-            this.data = data;
+            this._course = course;
         }
-
+      
         public IActionResult Index()
         {
-            GetCoursePopular();
-            return View();
-        }
-        public IActionResult GetCoursePopular()
-        {
-            var course = (from s in data.Courses
-                          join t in data.Users on s.IDTrainer equals t.Id
-                          select new CourseHomeViewModel
-                          {
-                              Image = s.ImageTrainer,
-                              TrainerName = t.Email,
-                              TenKhoaHoc = s.TenKhoaHoc
+            var courses = _course.getCourseAll().Take(6);
 
-                          }).ToList();
-            return View(course);
+            return View(courses);
         }
-       
-         
-        //Tim kiem khoa hoc
-    
 
         [HttpGet]
         public IActionResult Contact()

@@ -1,14 +1,29 @@
 ﻿@using TrainingWebsite.Data
 @inject ApplicationDbContext data;
-<div class="dropdown">
-    <button class="dropbtn">
-        Dropdown
-    </button>
-        <div class="dropdown-content">
-            
-            @foreach(var a in data.Apartments)
-             { 
-                 <a asp-action="GetCourseByJobPos" asp-controller="Search" asp-route-id="@a.ApartmentID">@a.ApartmentName</a>
-             }
+
+    <div class="sidebar_section">
+        <div class="sidebar_section_title">Categories</div>
+        <div class="sidebar_categories">
+            <ul>
+                @foreach (var item in data.Apartments.Where(x=>x.ApartmentName!=""))
+                {
+                    <li>
+                        <a href="#">@item.ApartmentName</a>
+                    </li>
+                }
+            </ul>
         </div>
-</div>
+    </div>
+
+    @*<div class="dropdown">
+        <button class="dropbtn">
+        </button>
+        <div class="dropdown-content">
+
+            @foreach (var a in data.Apartments)
+            {
+                <a asp-action="GetCourseByJobPos" asp-controller="Search" asp-route-id="@a.ApartmentID">@a.ApartmentName</a>
+            }
+
+        </div>
+    </div>*@

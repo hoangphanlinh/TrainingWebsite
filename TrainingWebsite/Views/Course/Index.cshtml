@@ -1,0 +1,227 @@
+﻿@using TrainingWebsite.ViewModels
+@using TrainingWebsite.Areas.Manager.Models
+
+@model IEnumerable<TrainingWebsite.Models.Course>
+@{
+    ViewData["Title"] = "Course";
+ Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<link rel="stylesheet" type="text/css" href="~/assets/styles/courses.css">
+<link rel="stylesheet" type="text/css" href="~/assets/styles/courses_responsive.css">
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 25vh;
+    }
+    ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+        ul.pagination li {
+            display: inline;
+        }
+
+            ul.pagination li a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                border: 1px solid #ddd;
+            }
+                ul.pagination li a:hover {
+                    background-color: #ddd;
+                }
+</style>
+<!-- Home -->
+
+<div class="home">
+    <div class="breadcrumbs_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumbs">
+                        <ul>
+                            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li>Courses</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Courses -->
+
+<div class="courses">
+    <div class="container">
+        <div class="row">
+
+            <!-- Courses Main Content -->
+            <div class="col-lg-8">
+                <div class="courses_search_container">
+                    <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+                        <input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
+                        <select id="courses_search_select" class="courses_search_select courses_search_input">
+                            <option>All Categories</option>
+                            <option>Category</option>
+                            <option>Category</option>
+                            <option>Category</option>
+                        </select>
+                        <button action="submit" class="courses_search_button ml-auto">search now</button>
+                    </form>
+                </div>
+                <div class="courses_container">
+                    <div class="row courses_row">
+                        @foreach (var course in Model)
+                        {
+                            <div class="col-lg-6 course_col">
+                                <div class="course">
+                                    <div class="course_image"><img object-fit:cover" src="@Url.Content("~/images/" + course.ImageTrainer)" class="card-img-top" alt=""></div>
+                                    <div class="course_body">
+                                        <h3 class="course_title"><a href="course.html">@course.TenKhoaHoc</a></h3>
+                                        <div class="course_teacher">@course.IDTrainer</div>
+                                    </div>
+                                    <div class="course_footer">
+                                        <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                            <ul class="pagination">
+                                @{
+                                    int numberPage = ViewBag.numberPage;
+                                    int pageCurrent = ViewBag.pageCurrent;
+                                    int offset = 2;//number display page
+
+
+                                    //config FirstLink
+                                    if (pageCurrent > 1)
+                                    {
+                                        int prevPage = pageCurrent - 1;
+                                        var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+                                        <li><a asp-controller="Course" asp-action="Index" asp-all-route-data="PrevLink">Prev</a></li>
+                                    }
+
+                                    int from = pageCurrent - offset;
+                                    int to = pageCurrent + offset;
+                                    if (from <= 0)
+                                    {
+                                        from = 1;
+                                        to = offset * 2;
+                                    }
+
+
+                                    if (to > numberPage)
+                                    {
+                                        to = numberPage;
+                                    }
+
+                                    int i;
+                                    for (i = from; i <= to; i++)
+                                    {
+                                        var parms = new Dictionary<string, string>
+                                                                            {
+                        { "page",i.ToString()}
+                    };
+                                        if (pageCurrent == i)
+                                        {
+                                            <li class="active"><a asp-controller="Course" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a asp-controller="Course" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                                        }
+
+                                    }
+
+                                    if (pageCurrent < numberPage - (to / 2))
+                                    {
+                                        <li><a>...</a></li>
+                                        var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+                                        <li><a asp-controller="Course" asp-action="Index" asp-all-route-data="LastLink">Last</a></li>
+                                    }
+
+                                    if (pageCurrent < numberPage)
+                                    {
+                                        int nextPage = pageCurrent + 1;
+                                        var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+                                        <li><a asp-controller="Course" asp-action="Index" asp-all-route-data="NextLink">Next</a></li>
+                                    }
+                                }
+                            </ul>
+                </div>
+            </div>
+            <!-- Courses Sidebar -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <!--Categories-->
+
+                    <partial name="~/Views/Shared/GetJobPos.cshtml" />
+
+                    <!-- Latest Course -->
+                    <div class="sidebar_section">
+                        <div class="sidebar_section_title">Latest Courses</div>
+                        <div class="sidebar_latest">
+
+                            <!-- Latest Course -->
+                            <div class="latest d-flex flex-row align-items-start justify-content-start">
+                                <div class="latest_image"><div><img src="~/assets/images/latest_1.jpg" alt=""></div></div>
+                                <div class="latest_content">
+                                    <div class="latest_title"><a href="course.html">How to Design a Logo a Beginners Course</a></div>
+                                    <div class="latest_price">Free</div>
+                                </div>
+                            </div>
+
+                            <!-- Latest Course -->
+                            <div class="latest d-flex flex-row align-items-start justify-content-start">
+                                <div class="latest_image"><div><img src="~/assets/images/latest_2.jpg" alt=""></div></div>
+                                <div class="latest_content">
+                                    <div class="latest_title"><a href="course.html">Photography for Beginners Masterclass</a></div>
+                                    <div class="latest_price">$170</div>
+                                </div>
+                            </div>
+
+                            <!-- Latest Course -->
+                            <div class="latest d-flex flex-row align-items-start justify-content-start">
+                                <div class="latest_image"><div><img src="~/assets/images/latest_3.jpg" alt=""></div></div>
+                                <div class="latest_content">
+                                    <div class="latest_title"><a href="course.html">The Secrets of Body Language</a></div>
+                                    <div class="latest_price">$220</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+            
+                    <!-- Tags -->
+                    <div class="sidebar_section">
+                        <div class="sidebar_section_title">Tags</div>
+                        <div class="sidebar_tags">
+                            <ul class="tags_list">
+                                <li><a href="#">creative</a></li>
+                                <li><a href="#">unique</a></li>
+                                <li><a href="#">photography</a></li>
+                                <li><a href="#">ideas</a></li>
+                                <li><a href="#">wordpress</a></li>
+                                <li><a href="#">startup</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/plugins/colorbox/jquery.colorbox-min.js"></script>
+<script src="~/assets/js/courses.js"></script>
