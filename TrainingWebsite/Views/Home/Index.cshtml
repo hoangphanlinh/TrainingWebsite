@@ -1,4 +1,4 @@
-﻿@model List<TrainingWebsite.Models.Course>
+﻿@model List<TrainingWebsite.ViewModels.CourseHomeViewModel>
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,16 +21,11 @@
                         <div class="home_slider_title">The Premium System Education</div>
                         <div class="home_slider_subtitle">Future Of Education Technology</div>
                         <div class="home_slider_form_container">
-                            <form action="#" id="home_search_form_1" class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
+                            <form method="get" asp-action="Index" id="home_search_form_1" class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
                                 <div class="d-flex flex-row align-items-center justify-content-start">
-                                    <input type="search" class="form-control" style="border:none;" placeholder="Keyword Search" required="required">
-                                    @*<select class="dropdown_item_select home_search_input">
-                                            <option>Category Courses</option>
-                                            <option>Category</option>
-                                            <option>Category</option>
-                                        </select>*@
+                                    <input value="@ViewData["searchString"]" name="searchString" type="search" class="form-control" style="border:none;" placeholder="Search Course Name.." required="required">
                                 </div>
-                                <button type="submit" class="home_search_button">search</button>
+                                <input type="submit" class="home_search_button" value="Search">
                             </form>
                         </div>
                     </div>
@@ -58,10 +53,10 @@
 
                 <div class="col-lg-4  mb-3 d-flex align-items-stretch">
                     <div class="course">
-                        <div class="course_image"><img object-fit:cover" src="@Url.Content("~/images/" + course.ImageTrainer)" class="card-img-top" alt=""></div>
+                        <div class="course_image"><img object-fit:cover" src="@Url.Content("~/images/" + course.Image)" class="card-img-top" alt=""></div>
                         <div class="course_body d-flex flex-column">
                             <h3 class="course_title"><a href="course.html">@course.TenKhoaHoc</a></h3>
-                            <div class="course_teacher">@course.IDTrainer</div>
+                            <div class="course_teacher">@course.TrainerName</div>
                         </div>
                         <div class="course_footer">
                             <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">

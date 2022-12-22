@@ -28,13 +28,16 @@ namespace TrainingWebsite.Controllers
             _logger = logger;
             this.Configuration = configuration;
             this._course = course;
-        }
-      
-        public IActionResult Index()
+        }  
+        public IActionResult Index(string searchString)
         {
-            var courses = _course.getCourseAll().Take(6);
-
-            return View(courses);
+            ViewData["searchString"] = searchString;
+            if (string.IsNullOrEmpty(searchString))
+            {
+                var list = _course.getCourseAllTake();
+                return View(list);
+            }
+            return View(_course.SearchCourse(searchString).ToList());
         }
 
         [HttpGet]

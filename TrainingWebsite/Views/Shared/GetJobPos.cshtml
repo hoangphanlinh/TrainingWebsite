@@ -7,23 +7,10 @@
             <ul>
                 @foreach (var item in data.Apartments.Where(x=>x.ApartmentName!=""))
                 {
-                    <li>
-                        <a href="#">@item.ApartmentName</a>
-                    </li>
+                <li>
+                    <a href="@Url.Action("Index","Course",new { page = 1, size = ViewBag.CurrentSize, txtSearch = ViewBag.txtSearch, JobPosID = ViewBag.JobPosID, ApartmentID = item.ApartmentID })">@item.ApartmentName</a>
+                </li>
                 }
             </ul>
         </div>
     </div>
-
-    @*<div class="dropdown">
-        <button class="dropbtn">
-        </button>
-        <div class="dropdown-content">
-
-            @foreach (var a in data.Apartments)
-            {
-                <a asp-action="GetCourseByJobPos" asp-controller="Search" asp-route-id="@a.ApartmentID">@a.ApartmentName</a>
-            }
-
-        </div>
-    </div>*@

@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using TrainingWebsite.ViewModels;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace TrainingWebsite
 {
@@ -104,13 +105,13 @@ namespace TrainingWebsite
                       options.ClientId = FBAuthNSection["ClientId"];
                       options.ClientSecret = FBAuthNSection["ClientSecret"];
                   });
-             
-                  
-            
-                 
-               
-                  
-                 
+
+
+
+
+           
+
+
 
 
 
