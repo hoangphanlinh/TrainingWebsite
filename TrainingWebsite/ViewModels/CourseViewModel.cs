@@ -24,6 +24,20 @@ namespace TrainingWebsite.ViewModels
         public int ApartID { get; set; }
       
     }
+    public class CourseDetailViewModel
+    {
+        public int Id { get; set; }
+        public string TenKhoaHoc { get; set; }
+        public string ImageKH { get; set; }
+        public string TenGV { get; set; }
+        public string JobPosName_Trainer { get; set; } 
+        public string JobPosName_Course { get; set; }
+        public int ThoiLuongKH { get; set; }
+        public string MucTieuKH { get; set; }
+        public string HinhThucDanhGia { get; set; }
+        public int CountEnroll { get; set; }
+
+    }
    
 
 }
