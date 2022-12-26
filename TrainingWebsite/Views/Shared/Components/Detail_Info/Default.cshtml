@@ -1,0 +1,27 @@
+﻿@model TrainingWebsite.ViewModels.CourseDetailViewModel
+
+    <div class="course_title">@Model.TenKhoaHoc</div>
+    <div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+
+        <!-- Course Info Item -->
+        <div class="course_info_item">
+            <div class="course_info_title">Teacher:</div>
+            <div class="course_info_text"><a href="#">@Model.TenGV</a></div>
+        </div>
+
+        <!-- Course Info Item -->
+        <div class="course_info_item">
+            <div class="course_info_title">Reviews:</div>
+            <div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <!-- Course Info Item -->
+        <div class="course_info_item">
+            <div class="course_info_title">Categories:</div>
+            <div class="course_info_text"><a href="#">@Model.JobPosName_Course</a></div>
+        </div>
+
+    </div>
+
+    <!-- Course Image -->
+    <div class="course_image"><img bject-fit:cover" src="@Url.Content("~/images/" + Model.ImageKH)" style=" width: 750px; height: 425px;" alt=""></div>

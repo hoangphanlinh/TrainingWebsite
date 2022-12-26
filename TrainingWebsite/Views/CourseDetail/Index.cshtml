@@ -1,4 +1,4 @@
-﻿
+﻿@model TrainingWebsite.ViewModels.CourseDetailViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,37 +42,15 @@
             <div class="col-lg-8">
 
                 <div class="course_container">
-                    <div class="course_title">Software Training</div>
-                    <div class="course_info d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-
-                        <!-- Course Info Item -->
-                        <div class="course_info_item">
-                            <div class="course_info_title">Teacher:</div>
-                            <div class="course_info_text"><a href="#">Jacke Masito</a></div>
-                        </div>
-
-                        <!-- Course Info Item -->
-                        <div class="course_info_item">
-                            <div class="course_info_title">Reviews:</div>
-                            <div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
-                        </div>
-
-                        <!-- Course Info Item -->
-                        <div class="course_info_item">
-                            <div class="course_info_title">Categories:</div>
-                            <div class="course_info_text"><a href="#">Languages</a></div>
-                        </div>
-
-                    </div>
-
-                    <!-- Course Image -->
-                    <div class="course_image"><img src="~/assets/images/course_image.jpg" alt=""></div>
+                    <!--Course Info-->
+                    <!--~/Views/Shared/Components/..-->
+                    @await Component.InvokeAsync("Detail_Info",new { course_id = ViewBag.Id})
 
                     <!-- Course Tabs -->
                     <div class="course_tabs_container">
                         <div class="tabs d-flex flex-row align-items-center justify-content-start">
                             <div class="tab active">description</div>
-                            <div class="tab">curriculum</div>
+                            @*<div class="tab">curriculum</div>*@
                             <div class="tab">reviews</div>
                         </div>
                         <div class="tab_panels">
@@ -150,16 +128,16 @@
                             </div>
 
                             <!-- Curriculum -->
-                            <div class="tab_panel tab_panel_2">
+                            <!--<div class="tab_panel tab_panel_2">
                                 <div class="tab_panel_content">
                                     <div class="tab_panel_title">Software Training</div>
                                     <div class="tab_panel_content">
                                         <div class="tab_panel_text">
                                             <p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
-                                        </div>
+                                        </div>-->
 
                                         <!-- Dropdowns -->
-                                        <ul class="dropdowns">
+                                        <!--<ul class="dropdowns">
                                             <li class="has_children">
                                                 <div class="dropdown_item">
                                                     <div class="dropdown_item_title"><span>Lecture 1:</span> Lorem Ipsn gravida nibh vel velit auctor aliquet.</div>
@@ -239,7 +217,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <!-- Reviews -->
                             <div class="tab_panel tab_panel_3">
@@ -344,117 +322,20 @@
             <div class="col-lg-4">
                 <div class="sidebar">
 
-                    <!-- Feature -->
-                    <div class="sidebar_section">
-                        <div class="sidebar_section_title">Course Feature</div>
-                        <div class="sidebar_feature">
-                            <div class="course_price">$180</div>
+                    @await Component.InvokeAsync("FeatureCourse", new { courseId = ViewBag.Id })
 
-                            <!-- Features -->
-                            <div class="feature_list">
-
-                                <!-- Feature -->
-                                <div class="feature d-flex flex-row align-items-center justify-content-start">
-                                    <div class="feature_title"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Duration:</span></div>
-                                    <div class="feature_text ml-auto">2 weeks</div>
-                                </div>
-
-                                <!-- Feature -->
-                                <div class="feature d-flex flex-row align-items-center justify-content-start">
-                                    <div class="feature_title"><i class="fa fa-file-text-o" aria-hidden="true"></i><span>Lectures:</span></div>
-                                    <div class="feature_text ml-auto">10</div>
-                                </div>
-
-                                <!-- Feature -->
-                                <div class="feature d-flex flex-row align-items-center justify-content-start">
-                                    <div class="feature_title"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span>Lectures:</span></div>
-                                    <div class="feature_text ml-auto">6</div>
-                                </div>
-
-                                <!-- Feature -->
-                                <div class="feature d-flex flex-row align-items-center justify-content-start">
-                                    <div class="feature_title"><i class="fa fa-list-alt" aria-hidden="true"></i><span>Lectures:</span></div>
-                                    <div class="feature_text ml-auto">Yes</div>
-                                </div>
-
-                                <!-- Feature -->
-                                <div class="feature d-flex flex-row align-items-center justify-content-start">
-                                    <div class="feature_title"><i class="fa fa-users" aria-hidden="true"></i><span>Lectures:</span></div>
-                                    <div class="feature_text ml-auto">35</div>
-                                </div>
-
-                            </div>
+                    <div class="card" style="width: 20rem; border: 1px solid rgba(0,0,0,.125); border-radius: 0.375rem; box-shadow: 0 0.0625rem 0.125rem #00000026, 0 0.0625rem 0.25rem #00000026;">
+                        <div class="card-body" style="text-align:center">
+                            <h4 class="card-title">Start Dec 25</h4>
+                            <a href="#" class="btn btn-danger" style="width:100%">Enroll</a>
                         </div>
                     </div>
-
-                    <!-- Feature -->
-                    <div class="sidebar_section">
-                        <div class="sidebar_section_title">Teacher</div>
-                        <div class="sidebar_teacher">
-                            <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-                                <div class="teacher_image"><img src="~/assets/images/teacher.jpg" alt=""></div>
-                                <div class="teacher_title">
-                                    <div class="teacher_name"><a href="#">Jacke Masito</a></div>
-                                    <div class="teacher_position">Marketing & Management</div>
-                                </div>
-                            </div>
-                            <div class="teacher_meta_container">
-                                <!-- Teacher Rating -->
-                                <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-                                    <div class="teacher_meta_title">Average Rating:</div>
-                                    <div class="teacher_meta_text ml-auto"><span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div>
-                                </div>
-                                <!-- Teacher Review -->
-                                <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-                                    <div class="teacher_meta_title">Review:</div>
-                                    <div class="teacher_meta_text ml-auto"><span>12k</span><i class="fa fa-comment" aria-hidden="true"></i></div>
-                                </div>
-                                <!-- Teacher Quizzes -->
-                                <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
-                                    <div class="teacher_meta_title">Quizzes:</div>
-                                    <div class="teacher_meta_text ml-auto"><span>600</span><i class="fa fa-user" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="teacher_info">
-                                <p>Hi! I am Masion, I’m a marketing & management  eros pulvinar velit laoreet, sit amet egestas erat dignissim. Sed quis rutrum tellus, sit amet viverra felis. Cras sagittis sem sit amet urna feugiat rutrum nam nulla ipsum.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <br/><br/>
+                    <!-- Feature Teacher-->
+                    @await Component.InvokeAsync("TeacherFeature", new { courseID = ViewBag.Id })
 
                     <!-- Latest Course -->
-                    <div class="sidebar_section">
-                        <div class="sidebar_section_title">Latest Courses</div>
-                        <div class="sidebar_latest">
-
-                            <!-- Latest Course -->
-                            <div class="latest d-flex flex-row align-items-start justify-content-start">
-                                <div class="latest_image"><div><img src="~/assets/images/latest_1.jpg" alt=""></div></div>
-                                <div class="latest_content">
-                                    <div class="latest_title"><a href="course.html">How to Design a Logo a Beginners Course</a></div>
-                                    <div class="latest_price">Free</div>
-                                </div>
-                            </div>
-
-                            <!-- Latest Course -->
-                            <div class="latest d-flex flex-row align-items-start justify-content-start">
-                                <div class="latest_image"><div><img src="~/assets/images/latest_2.jpg" alt=""></div></div>
-                                <div class="latest_content">
-                                    <div class="latest_title"><a href="course.html">Photography for Beginners Masterclass</a></div>
-                                    <div class="latest_price">$170</div>
-                                </div>
-                            </div>
-
-                            <!-- Latest Course -->
-                            <div class="latest d-flex flex-row align-items-start justify-content-start">
-                                <div class="latest_image"><div><img src="~/assets/images/latest_3.jpg" alt=""></div></div>
-                                <div class="latest_content">
-                                    <div class="latest_title"><a href="course.html">The Secrets of Body Language</a></div>
-                                    <div class="latest_price">$220</div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                    @await Component.InvokeAsync("LatestCourse", new { courseID = ViewBag.Id })
 
                 </div>
             </div>

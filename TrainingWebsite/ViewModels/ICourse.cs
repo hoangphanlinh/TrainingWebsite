@@ -24,6 +24,11 @@ namespace TrainingWebsite.ViewModels
         List<SelectListItem> LevelDropDown();
         IEnumerable<CourseHomeViewModel> SearchCourse(string searchString);
         IEnumerable<Occuption> JobPosDropDown();
+        //int getCountCourse();
+        IEnumerable<CourseDetailViewModel> GetCourseDetail(int id);
+        IEnumerable<CourseDetailViewModel> CourseFeatureDDetail(int id);
+        IEnumerable<CourseDetailViewModel> TeacherFeatureDDetail(int id);
+        IEnumerable<CourseDetailViewModel> getLatestCourse(int id);
 
 
     }

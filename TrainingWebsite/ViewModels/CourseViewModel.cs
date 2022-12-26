@@ -29,6 +29,7 @@ namespace TrainingWebsite.ViewModels
         public int Id { get; set; }
         public string TenKhoaHoc { get; set; }
         public string ImageKH { get; set; }
+        public string ImageTrainer { get; set; }
         public string TenGV { get; set; }
         public string JobPosName_Trainer { get; set; } 
         public string JobPosName_Course { get; set; }

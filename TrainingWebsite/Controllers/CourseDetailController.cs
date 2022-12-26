@@ -8,8 +8,9 @@ namespace TrainingWebsite.Controllers
 {
     public class CourseDetailController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
+            ViewBag.Id = id;
             return View();
         }
     }
