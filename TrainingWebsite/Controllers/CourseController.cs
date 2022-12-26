@@ -15,14 +15,11 @@ namespace TrainingWebsite.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly ApplicationDbContext data;
         private readonly ICourse _course;
-        public CourseController(ApplicationDbContext _data, ICourse _course)
+        public CourseController(ICourse _course)
         {
-            this.data = _data;
             this._course = _course;
         }
-        public int pageSize = 4;
         public IActionResult Index(int? size, int? page, string txtSearch, int JobPosID = 0, int ApartmentID = 0)
         {
             ViewBag.txtSearch = txtSearch;

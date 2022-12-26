@@ -56,7 +56,7 @@
                     <div class="course">
                         <div class="course_image"><img object-fit:cover" src="@Url.Content("~/images/" + course.Image)" class="card-img-top" alt=""></div>
                         <div class="course_body d-flex flex-column">
-                            <h3 class="course_title"><a href="@Url.Action("Index","CourseDetail")">@course.TenKhoaHoc</a></h3>
+                            <h3 class="course_title"><a href="@Url.Action("Index","CourseDetail",new { id = course.Id })">@course.TenKhoaHoc</a></h3>
                             <div class="course_teacher">@course.TrainerName</div>
                         </div>
                         <div class="course_footer">

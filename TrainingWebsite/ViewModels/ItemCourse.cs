@@ -163,6 +163,62 @@ namespace TrainingWebsite.ViewModels
                           });
             return result;
         }
+        public IEnumerable<CourseDetailViewModel> GetCourseDetail(int id)
+        {
+            var model = (from u in data.Users
+                         join c in data.Courses on u.Id equals c.IDTrainer
+                         join o in data.Occuptions on c.IDJobPos equals o.OccuptionID
+                         where c.ID == id
+                         select new CourseDetailViewModel
+                         {
+                             Id = id,
+                             TenKhoaHoc = c.TenKhoaHoc,
+                             ImageKH = c.ImageTrainer,
+                             TenGV = u.FullName,
+                             ThoiLuongKH = c.ThoiLuongKhoaHoc,
+                             JobPosName_Course = o.OccuptionName
+                         });
+            return model;
+        }
+        public IEnumerable<CourseDetailViewModel> CourseFeatureDDetail(int id)
+        {
+            var model = (from c in data.Courses
+                         where c.ID == id
+                         select new CourseDetailViewModel
+                         {
+                             ThoiLuongKH = c.ThoiLuongKhoaHoc,
+                         });
+            return model;
+        }
+        public IEnumerable<CourseDetailViewModel> TeacherFeatureDDetail(int id)
+        {
+            var model = (from u in data.Users
+                         join o in data.Occuptions on u.OccuptionID equals o.OccuptionID
+                         join c in data.Courses on u.Id equals c.IDTrainer
+                         where c.ID == id
+                         select new CourseDetailViewModel
+                         {
+                             TenGV = u.FullName,
+                             JobPosName_Trainer = o.OccuptionName,
+                             ImageTrainer = u.Image.ToString()
+                         });
+            return model;
+        }
+        public IEnumerable<CourseDetailViewModel> getLatestCourse(int id)
+        {
+            var jobID = data.Courses.Where(x => x.ID == id).FirstOrDefault().IDJobPos;
+
+            var model = (from c in data.Courses
+                         where c.IDJobPos == jobID
+                         select new CourseDetailViewModel
+                         {
+                             Id = c.ID,
+                             TenKhoaHoc = c.TenKhoaHoc,
+                             ImageKH = c.ImageTrainer
+                         });
+            return model;
+        }
+
 
 
 

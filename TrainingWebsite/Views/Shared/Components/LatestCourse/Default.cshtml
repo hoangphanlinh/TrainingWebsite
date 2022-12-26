@@ -1,0 +1,16 @@
+﻿@model IEnumerable<TrainingWebsite.ViewModels.CourseDetailViewModel>
+    <div class="sidebar_section">
+        <div class="sidebar_section_title">Latest Courses</div>
+        <div class="sidebar_latest">
+            @foreach (var course in Model)
+            {
+                <!-- Latest Course -->
+            <div class="latest d-flex flex-row align-items-start justify-content-start">
+                <div class="latest_image"><div><img src="@Url.Content("~/images/" + course.ImageKH)" alt=""></div></div>
+                <div class="latest_content">
+                    <div class="latest_title"><a href="@Url.Action("Index","CourseDetail",new { id = course.Id })">@course.TenKhoaHoc</a></div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
