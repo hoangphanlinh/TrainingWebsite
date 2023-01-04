@@ -112,6 +112,60 @@
     <Compile Remove="Migrations\20221208015234_CreateTable_ChuDe.Designer.cs" />
     <Compile Remove="Migrations\20221208015618_AddCol_TenChuDe.cs" />
     <Compile Remove="Migrations\20221208015618_AddCol_TenChuDe.Designer.cs" />
+    <Compile Remove="Migrations\20230102062249_DeleteTableCourseClassroomError.cs" />
+    <Compile Remove="Migrations\20230102062249_DeleteTableCourseClassroomError.Designer.cs" />
+    <Compile Remove="Migrations\20230102062449_deletetablecourseClassroom.cs" />
+    <Compile Remove="Migrations\20230102062449_deletetablecourseClassroom.Designer.cs" />
+    <Compile Remove="Migrations\20230102063031_CreateTableCourseClass.cs" />
+    <Compile Remove="Migrations\20230102063031_CreateTableCourseClass.Designer.cs" />
+    <Compile Remove="Migrations\20230102063324_Delete.cs" />
+    <Compile Remove="Migrations\20230102063324_Delete.Designer.cs" />
+    <Compile Remove="Migrations\20230102063540_deleteTableCourseClass.cs" />
+    <Compile Remove="Migrations\20230102063540_deleteTableCourseClass.Designer.cs" />
+    <Compile Remove="Migrations\20230102063903_AddTableCourseClass.cs" />
+    <Compile Remove="Migrations\20230102063903_AddTableCourseClass.Designer.cs" />
+    <Compile Remove="Migrations\20230102064716_DeleteTable.cs" />
+    <Compile Remove="Migrations\20230102064716_DeleteTable.Designer.cs" />
+    <Compile Remove="Migrations\20230102100107_AddTableCourseClass.cs" />
+    <Compile Remove="Migrations\20230102100107_AddTableCourseClass.Designer.cs" />
+    <Compile Remove="Migrations\20230102143700_AddManayToMany.cs" />
+    <Compile Remove="Migrations\20230102143700_AddManayToMany.Designer.cs" />
+    <Compile Remove="Migrations\20230102143826_AddManayToMany.cs" />
+    <Compile Remove="Migrations\20230102143826_AddManayToMany.Designer.cs" />
+    <Compile Remove="Migrations\20230102144027_dealete.cs" />
+    <Compile Remove="Migrations\20230102144027_dealete.Designer.cs" />
+    <Compile Remove="Migrations\20230102152259_AddTableCourseClass.cs" />
+    <Compile Remove="Migrations\20230102152259_AddTableCourseClass.Designer.cs" />
+    <Compile Remove="Migrations\20230102152406_AddTableCourseClass.cs" />
+    <Compile Remove="Migrations\20230102152406_AddTableCourseClass.Designer.cs" />
+    <Compile Remove="Migrations\20230102152813_remove-migration.cs" />
+    <Compile Remove="Migrations\20230102152813_remove-migration.Designer.cs" />
+    <Compile Remove="Migrations\20230102152958_AddtableManyToMany.cs" />
+    <Compile Remove="Migrations\20230102152958_AddtableManyToMany.Designer.cs" />
+    <Compile Remove="Migrations\20230102153528_ManyToMany.cs" />
+    <Compile Remove="Migrations\20230102153528_ManyToMany.Designer.cs" />
+    <Compile Remove="Migrations\20230102154125_CreateTable.cs" />
+    <Compile Remove="Migrations\20230102154125_CreateTable.Designer.cs" />
+    <Compile Remove="Migrations\20230102154410_CreateTable.cs" />
+    <Compile Remove="Migrations\20230102154410_CreateTable.Designer.cs" />
+    <Compile Remove="Migrations\20230102154643_Add.cs" />
+    <Compile Remove="Migrations\20230102154643_Add.Designer.cs" />
+    <Compile Remove="Migrations\20230102160745_AddTable.cs" />
+    <Compile Remove="Migrations\20230102160745_AddTable.Designer.cs" />
+    <Compile Remove="Migrations\20230102161235_AddTbale.cs" />
+    <Compile Remove="Migrations\20230102161235_AddTbale.Designer.cs" />
+    <Compile Remove="Migrations\20230102161553_Add.cs" />
+    <Compile Remove="Migrations\20230102161553_Add.Designer.cs" />
+    <Compile Remove="Migrations\20230102162212_Add.cs" />
+    <Compile Remove="Migrations\20230102162212_Add.Designer.cs" />
+    <Compile Remove="Migrations\20230102162530_Add.cs" />
+    <Compile Remove="Migrations\20230102162530_Add.Designer.cs" />
+    <Compile Remove="Migrations\20230102162939_Add.cs" />
+    <Compile Remove="Migrations\20230102162939_Add.Designer.cs" />
+    <Compile Remove="Migrations\20230102163132_Add.cs" />
+    <Compile Remove="Migrations\20230102163132_Add.Designer.cs" />
+    <Compile Remove="Migrations\20230102163531_Add.cs" />
+    <Compile Remove="Migrations\20230102163531_Add.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -126,8 +180,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.30" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.31" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.31" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.30" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.30">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.32">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -138,9 +192,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Trainer\Data\" />
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\Video\" />
   </ItemGroup>

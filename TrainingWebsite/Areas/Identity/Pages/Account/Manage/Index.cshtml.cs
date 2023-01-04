@@ -30,8 +30,8 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             _userManager = userManager;
             _signInManager = signInManager;
             _dataContext = dataContext;
-          
-           
+
+
         }
 
         public string Username { get; set; }
@@ -50,7 +50,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
             [DataType(DataType.Text)]
-            [Display(Name ="Full Name")]
+            [Display(Name = "Full Name")]
             public string FullName { get; set; }
             [DataType(DataType.ImageUrl)]
             [Display(Name = "Profile Image")]
@@ -67,7 +67,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             public int? LevelID { get; set; }
 
             [DataType(DataType.Text)]
-            [Display(Name = "Job Position")] 
+            [Display(Name = "Job Position")]
             public int? OccuptionID { get; set; }
 
 
@@ -75,7 +75,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
 
         }
 
-     
+
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
@@ -103,13 +103,13 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             ViewData["ListOfLevel"] = LevelList;
 
             var OccuptionList = (from s in _dataContext.Occuptions
-                             select new SelectListItem()
-                             {
-                                 Text = s.OccuptionName,
-                                 Value = s.OccuptionID.ToString()
+                                 select new SelectListItem()
+                                 {
+                                     Text = s.OccuptionName,
+                                     Value = s.OccuptionID.ToString()
 
 
-                             }).ToList();
+                                 }).ToList();
             OccuptionList.Insert(0, new SelectListItem()
             {
                 Text = "-----Select-----",
@@ -129,7 +129,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
                 DateBirth = datebirth,
                 LevelID = level,
                 OccuptionID = occuption,
-               
+
             };
         }
 
@@ -140,11 +140,11 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-          
+
             await LoadAsync(user);
             return Page();
         }
-        
+
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -173,7 +173,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
                 Value = string.Empty
             });
             ViewData["ListOfLevel"] = LevelList;
-            
+
             ////List of Occuption for drop down
             var OccuptionList = (from s in _dataContext.Occuptions
                                  select new SelectListItem()

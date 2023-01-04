@@ -1,5 +1,7 @@
 ﻿@using TrainingWebsite.Areas.Trainer.Models
-@model List<TrainingWebsite.Models.Course>
+@using X.PagedList;
+@using X.PagedList.Mvc;
+@model IPagedList<TrainingWebsite.ViewModels.CourseHomeViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -315,7 +317,7 @@
 </script>
 <div class="pagetitle">
     <nav>
-        <h1>Manage <b>Users</b></h1>
+        <h1>Course<b>List</b></h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="@Url.Action("Index","Course")">Course</a></li>
             <li class="breadcrumb-item active">Course List</li>
@@ -326,22 +328,23 @@
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <form class="input-group w-auto float-left" asp-action="Index" method="get">
-                            <input id="myInput" type="text" class="form-control" placeholder="Search for" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <div class="row" id="row-header">
+                        <form class="col-6 d-flex align-items-center justify-content-start" asp-action="Index" method="get" style="padding-right: 40px; padding-left: 0px;">
+                            <div class="col-sm-12">
+                                <input id="myInput" type="text" class="form-control" placeholder="Ten khoa hoc.." name="txtSearch" value="@ViewBag.txtSearch" />
+                            </div>
+                            <div class="col-sm-6">
+                                <select name="JobPosID" asp-items="ViewBag.JobPosList" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-6">
+                                <select name="ApartID" asp-items="ViewBag.ApartList" class="form-control"></select>
+
+                            </div>
                             <div class="input-group-append">
                                 <button class="btn btn-success bi bi-search" type="submit"></button>
                             </div>
-
                         </form>
-                    </div>
-                    <div class="col-sm-6">
-                        <a asp-action="Add" asp-controller="AdminCourse" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Create Course</span></a>
-
-
-                        @*<a asp-action="DeleteUser" class="btn btn-danger" ><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>*@
-                    </div>
+                    
                 </div>
             </div>
 
@@ -349,14 +352,12 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>MaKhoaHoc</th>
-                        <th>Name</th>
+                        <th>TenKhoaHoc</th>
                         <th>ThoiLuongKhoaHoc</th>
-                        <th>MucTieuKhoaHoc</th>
-                        <th>HinhThucDanhGia</th>
-                        <th>IDKhoaHocTienQuyet</th>
+                        <th>Trainer_Name</th>
                         <th>JobPosName</th>
-                        <th>Topic</th>
+                        <th>ApartmentName</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="myTable">
@@ -364,69 +365,69 @@
                     {
                         <tr>
 
-                            <td>@course.ID</td>
-                            <td>@course.MaKhoaHoc</td>
+                            <td>@course.Id</td>
                             <td>@course.TenKhoaHoc</td>
                             <td>@course.ThoiLuongKhoaHoc</td>
-                            <td>@course.MucTieuKhoaHoc</td>
-                            <td>@course.HinhThucDanhGia</td>
-                            <td>@course.IDKhoaHocTienQuyet</td>
-                            <td>@course.IDJobPos</td>
-                            <td>
-                                <a asp-action="Details" asp-controller="AdminCourse" asp-route-id="@course.ID" class="edit"><i style="font-size: 30px;" class="material-icons" data-toggle="tooltip" title="Session list">&#xE172;</i></a>
-                            </td>
-                            <td>
-                                <form asp-action="Delete" asp-route-id="@course.ID">
-                                    <a asp-action="Edit" asp-route-id="@course.ID" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <button onclick="ConfirmDelete()" class="delete material-icons" data-toggle="tooltip" style="border:none" title="Delete">&#xE872;</button>
-                                </form>
-
-                            </td>
+                            <td>@course.TrainerName</td>
+                            <td>@course.JobPosName</td>
+                            <td>@course.ApartName</td>
+       
+                           <td>
+                             <a asp-action="Details" asp-controller="AdminCourse" asp-route-id="@course.Id" class="edit"><i style="font-size: 30px;" class="material-icons" data-toggle="tooltip" title="Detail">&#xe88e;</i></a>
+                           </td>
                         </tr>
                     }
                 </tbody>
             </table>
-            @*<br />
-            @{
-                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-            }
+            <!-- Thêm mã phân trang -->
+            <br />
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                    @using (Html.BeginForm("Index", "AdminCourse", FormMethod.Get))
+                    {
+                        <p>
+                            Kích thước trang: @Html.DropDownList("size", (List<SelectListItem>)ViewBag.Size, new { @onchange = "this.form.submit();" })
+                        </p>
 
-            <a asp-action="Index"
-               asp-route-pageNumber="@(Model.PageIndex - 1)"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-default @prevDisabled">
-                Previous
-            </a>
-            <a asp-action="Index"
-               asp-route-pageNumber="@(Model.PageIndex + 1)"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-default @nextDisabled">
-                Next
-            </a>*@
-        </div>
+                        @Html.Hidden("page", (object)ViewBag.Page)
+                        @Html.Hidden("txtSearch", (object)ViewBag.txtSearch)
+                        @Html.Hidden("JobPosID", (object)ViewBag.JobPosID)
+                        @Html.Hidden("ApartID", (object)ViewBag.ApartID)
+
+                    }
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", "AdminCourse", new { page, size = ViewBag.CurrentSize, txtSearch = ViewBag.txtSearch, JobPosID = ViewBag.JobPosID, ApartID = ViewBag.ApartID }), X.PagedList.Web.Common.PagedListRenderOptions.ClassicPlusFirstAndLast)
+                </div>
+
+                    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+                        Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                    </div>
+                </div>
+
+                <!-- Kết thúc -->
+            </div>
     </div>
 </div>
 
 <script>
-    $(document).ready(function () {
-        $("#myInput").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-        /* $('#dtBasicExample').DataTable();*/
-        /* $('.dataTables_length').addClass('bs-select');*/
-    });
+    //$(document).ready(function () {
+    //    $("#myInput").on("keyup", function () {
+    //        var value = $(this).val().toLowerCase();
+    //        $("#myTable tr").filter(function () {
+    //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //        });
+    //    });
+    //});
 
-    function ConfirmDelete() {
-        var x = confirm("Are you sure you want to delete?");
-        if (x)
-            return true;
-        else
-            return false;
-    }
+    //function ConfirmDelete() {
+    //    var x = confirm("Are you sure you want to delete?");
+    //    if (x)
+    //        return true;
+    //    else
+    //        return false;
+    //}
 </script>
 
 

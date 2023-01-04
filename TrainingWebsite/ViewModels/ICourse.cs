@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TrainingWebsite.Areas.Identity.Data;
 using TrainingWebsite.Models;
 
 namespace TrainingWebsite.ViewModels
@@ -20,8 +21,10 @@ namespace TrainingWebsite.ViewModels
         void Edit(Course course);
         void Delete(int id);
         Course FindById(int id);
-        public List<SelectListItem> OccuptionDropDown();
-        List<SelectListItem> LevelDropDown();
+        IEnumerable<SelectListItem> OccuptionDropDown();
+        IEnumerable<SelectListItem> LevelDropDown();
+        IEnumerable<SelectListItem> ApartmentDropDown();
+
         IEnumerable<CourseHomeViewModel> SearchCourse(string searchString);
         IEnumerable<Occuption> JobPosDropDown();
         //int getCountCourse();
@@ -29,8 +32,15 @@ namespace TrainingWebsite.ViewModels
         IEnumerable<CourseDetailViewModel> CourseFeatureDDetail(int id);
         IEnumerable<CourseDetailViewModel> TeacherFeatureDDetail(int id);
         IEnumerable<CourseDetailViewModel> getLatestCourse(int id);
+        IEnumerable<CourseHomeViewModel> getCourseInAdmin();
+        IEnumerable<EmployeeListViewModel> getEmployeeList();
 
-
+        //Profile
+        IEnumerable<profileViewModel> getProfileDetail(string Id);
+        IEnumerable<profileViewModel> getProfileImage(string Id);
+        IEnumerable<ListClassroomViewModel> getListClassroom(string Id);
+        void addClassroom(string unifile, string Id,createClassViewModel model);
+        
     }
 
 }

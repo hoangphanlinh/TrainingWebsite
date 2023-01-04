@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,8 @@ using TrainingWebsite.Models;
 namespace TrainingWebsite.Areas.Trainer.Controllers
 {
     [Area("Trainer")]
+    [Authorize(Roles = "Trainer")]
+
     public class CourseController : Controller
     {
         private readonly ApplicationDbContext data;
@@ -37,7 +40,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
         public async Task<IActionResult> Index(string searchString, string currentFilter, int? pageNumber)
         {
             var trainerId = _userManager.GetUserId(HttpContext.User);
-           
+
             if (trainerId == null)
             {
                 return RedirectToAction("Login", "Account", new { Areas = "Manager" });
@@ -60,19 +63,19 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                               where u.Id.Contains(trainerId)
                               select new ListCourseViewModel
                               {
-                                  ID = co.ID,
+                                  ID = co.courseID,
                                   MaKhoaHoc = co.MaKhoaHoc,
                                   Name = co.TenKhoaHoc,
                                   ThoiLuongKhoaHoc = co.ThoiLuongKhoaHoc,
                                   MucTieuKhoaHoc = co.MucTieuKhoaHoc,
                                   HinhThucDanhGia = co.HinhThucDanhGia,
-                                  IDKhoaHocTienQuyet = co.IDKhoaHocTienQuyet,
+
                                   JobPosName = s.OccuptionName
                               });
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    course = course.Where(s => s.Name.Contains(searchString) || s.ID.ToString().Contains(searchString) ||s.MaKhoaHoc.Contains(searchString)
+                    course = course.Where(s => s.Name.Contains(searchString) || s.ID.ToString().Contains(searchString) || s.MaKhoaHoc.Contains(searchString)
                     || s.JobPosName.Contains(searchString));
                 }
 
@@ -80,7 +83,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                 int pageSize = 3;
                 return View(await PaginatedList<ListCourseViewModel>.CreateAsync(course.AsNoTracking(), pageNumber ?? 1, pageSize));
             }
-           
+
 
         }
         private void OccuptionDropDownList()
@@ -119,9 +122,9 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             {
                 string uniuefilename = string.Empty;
                 var files = HttpContext.Request.Form.Files;
-                foreach(var Image in files)
+                foreach (var Image in files)
                 {
-                    if(Image != null && Image.Length > 0)
+                    if (Image != null && Image.Length > 0)
                     {
                         var file = Image;
 
@@ -146,7 +149,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                     ThoiLuongKhoaHoc = model.ThoiLuongKhoaHoc,
                     MucTieuKhoaHoc = model.MucTieuKhoaHoc,
                     HinhThucDanhGia = model.HinhThucDanhGia,
-                    IDKhoaHocTienQuyet = model.IDKhoaHocTienQuyet,
+
                     IDTrainer = trainerId,
                     ImageTrainer = uniuefilename,
                     IDJobPos = model.IDJobPos
@@ -159,19 +162,19 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             OccuptionDropDownList();
             return View(model);
         }
-        public async Task <IActionResult> EditCourse(int id)
+        public async Task<IActionResult> EditCourse(int id)
         {
             var trainerId = _userManager.GetUserId(HttpContext.User);
             ViewBag.TrainerId = trainerId;
 
-            var course = await data.Courses.SingleOrDefaultAsync(m => m.ID == id);
+            var course = await data.Courses.SingleOrDefaultAsync(m => m.courseID == id);
             if (course == null)
             {
                 return NotFound();
             }
 
             OccuptionDropDownList();
-           
+
             return View(course);
         }
         [HttpPost]
@@ -183,7 +186,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
 
             if (ModelState.IsValid)
             {
-                var course = await data.Courses.SingleOrDefaultAsync(m => m.ID == id);
+                var course = await data.Courses.SingleOrDefaultAsync(m => m.courseID == id);
 
                 string uniuefilename = string.Empty;
                 var files = HttpContext.Request.Form.Files;
@@ -207,26 +210,25 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                         }
                     }
                 }
-                course.ID = _course.ID;
+                course.courseID = id;
                 course.MaKhoaHoc = _course.MaKhoaHoc;
                 course.TenKhoaHoc = _course.TenKhoaHoc;
                 course.ThoiLuongKhoaHoc = _course.ThoiLuongKhoaHoc;
                 course.MucTieuKhoaHoc = _course.MucTieuKhoaHoc;
                 course.HinhThucDanhGia = _course.HinhThucDanhGia;
-                course.IDKhoaHocTienQuyet = _course.IDKhoaHocTienQuyet;
                 course.JobPos = _course.JobPos;
                 await data.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
 
-                OccuptionDropDownList();
-                return View();
+            OccuptionDropDownList();
+            return View();
         }
 
         public async Task<IActionResult> DeleteCourse(int id)
         {
-            var course = await data.Courses.SingleOrDefaultAsync(m => m.ID == id);
+            var course = await data.Courses.SingleOrDefaultAsync(m => m.courseID == id);
             data.Courses.Remove(course);
             await data.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

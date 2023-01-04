@@ -14,7 +14,7 @@ namespace TrainingWebsite.Areas.Identity.Data
     {
 
 
-
+        
         [PersonalData]
         public string FullName { get; set; }
         [PersonalData]
@@ -32,7 +32,7 @@ namespace TrainingWebsite.Areas.Identity.Data
 
         [PersonalData]
         [ForeignKey("Level")]
-        public Nullable<int> LevelID { get; set; } = 8;
+        public Nullable<int> LevelID { get; set; } = 9;
         public Level Level { get; set; }
 
 

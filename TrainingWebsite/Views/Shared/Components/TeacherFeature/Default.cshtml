@@ -4,7 +4,7 @@
         <div class="sidebar_section_title">Teacher</div>
         <div class="sidebar_teacher">
             <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-                <div class="teacher_image"><img src="@Url.Content("~/images/" + Model.ImageTrainer)" alt=""></div>
+                <div class="teacher_image"><img src="data:image/*;base64,@(Convert.ToBase64String(Model.ImageTrainer))" alt=""></div>
                 <div class="teacher_title">
                     <div class="teacher_name"><a href="#">@Model.TenGV</a></div>
                     <div class="teacher_position">@Model.JobPosName_Trainer</div>
