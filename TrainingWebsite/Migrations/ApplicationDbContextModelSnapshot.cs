@@ -281,7 +281,7 @@ namespace TrainingWebsite.Migrations
 
             modelBuilder.Entity("TrainingWebsite.Models.Classroom", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("classID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -289,8 +289,8 @@ namespace TrainingWebsite.Migrations
                     b.Property<string>("AdminID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CourseID")
-                        .HasColumnType("int");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -301,18 +301,16 @@ namespace TrainingWebsite.Migrations
                     b.Property<string>("startDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("classID");
 
                     b.HasIndex("AdminID");
-
-                    b.HasIndex("CourseID");
 
                     b.ToTable("Classrooms");
                 });
 
             modelBuilder.Entity("TrainingWebsite.Models.Course", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("courseID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -321,9 +319,6 @@ namespace TrainingWebsite.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IDJobPos")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IDKhoaHocTienQuyet")
                         .HasColumnType("int");
 
                     b.Property<string>("IDTrainer")
@@ -344,15 +339,28 @@ namespace TrainingWebsite.Migrations
                     b.Property<int>("ThoiLuongKhoaHoc")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("courseID");
 
                     b.HasIndex("IDJobPos");
-
-                    b.HasIndex("IDKhoaHocTienQuyet");
 
                     b.HasIndex("IDTrainer");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("TrainingWebsite.Models.CourseClassroom", b =>
+                {
+                    b.Property<int>("courseID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("classID")
+                        .HasColumnType("int");
+
+                    b.HasKey("courseID", "classID");
+
+                    b.HasIndex("classID");
+
+                    b.ToTable("CourseClassrooms");
                 });
 
             modelBuilder.Entity("TrainingWebsite.Models.Level", b =>
@@ -466,12 +474,6 @@ namespace TrainingWebsite.Migrations
                     b.HasOne("TrainingWebsite.Areas.Identity.Data.ApplicationUser", "Admin")
                         .WithMany()
                         .HasForeignKey("AdminID");
-
-                    b.HasOne("TrainingWebsite.Models.Course", "course")
-                        .WithMany()
-                        .HasForeignKey("CourseID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainingWebsite.Models.Course", b =>
@@ -482,13 +484,24 @@ namespace TrainingWebsite.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TrainingWebsite.Models.Course", "Course2")
-                        .WithMany("Course1")
-                        .HasForeignKey("IDKhoaHocTienQuyet");
-
                     b.HasOne("TrainingWebsite.Areas.Identity.Data.ApplicationUser", "Trainer")
                         .WithMany()
                         .HasForeignKey("IDTrainer");
+                });
+
+            modelBuilder.Entity("TrainingWebsite.Models.CourseClassroom", b =>
+                {
+                    b.HasOne("TrainingWebsite.Models.Classroom", "classroom")
+                        .WithMany("CourseClassroom")
+                        .HasForeignKey("classID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TrainingWebsite.Models.Course", "course")
+                        .WithMany("CourseClassroom")
+                        .HasForeignKey("courseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainingWebsite.Models.Occuption", b =>

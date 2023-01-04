@@ -1,0 +1,82 @@
+﻿@model TrainingWebsite.ViewModels.EditProfile
+
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<h4>EditProfile</h4>
+<hr />
+<form asp-action="EditProfile" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Job</label>
+                <select asp-for="JobID" asp-items="@ViewBag.JobList" class="form-control"></select>
+                <span asp-validation-for="JobID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Level</label>
+                <select asp-for="LevelID" asp-items="@ViewBag.LevelList" class="form-control"></select>
+                <span asp-validation-for="LevelID" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @if (Model.Image != null)
+                {
+                    <img id="profilePicture" style="width:300px;height:300px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.Image))">
+                }
+                else
+                {
+                    <img id="profilePicture" style="width:300px;height:300px; object-fit:cover" src="">
+                }
+                <input type="file"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       asp-for="Image"
+                       class="form-control"
+                       style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
+                       onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+

@@ -84,7 +84,7 @@ namespace TrainingWebsite
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                 //options.Cookie.SameSite = SameSiteMode.None;
                 //options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                options.LoginPath = "/Identity/Account/Login";
+                options.LoginPath = "/AreaAccount/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
 
@@ -105,19 +105,6 @@ namespace TrainingWebsite
                       options.ClientId = FBAuthNSection["ClientId"];
                       options.ClientSecret = FBAuthNSection["ClientSecret"];
                   });
-
-
-
-
-           
-
-
-
-
-
-
-
-
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             //.AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
@@ -166,6 +153,21 @@ namespace TrainingWebsite
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "Manager",
+                    areaName: "Manager",
+                    pattern: "Manager/{controller=Home}/{action=Index}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller=Home}/{action=Index}");
+
+                endpoints.MapAreaControllerRoute(
+                    name: "Trainer",
+                    areaName: "Trainer",
+                    pattern: "Trainer/{controller=Home}/{action=Index}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

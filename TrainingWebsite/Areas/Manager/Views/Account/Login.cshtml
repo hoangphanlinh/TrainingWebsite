@@ -1,7 +1,7 @@
 ﻿@model TrainingWebsite.Areas.Manager.Models.LoginViewModel
 @{
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_AreasAccounttLayout.cshtml";
+    Layout = "~/Areas/Manager/Views/Shared/_AreasAccounttLayout.cshtml";
 }
 
 <div class="d-flex justify-content-center py-4">
@@ -19,7 +19,7 @@
             <h5 class="card-title text-center pb-0 fs-4">Login</h5>
         </div>
 
-        <form class="row g-3 needs-validation"  novalidate method="post">
+        <form class="row g-3 needs-validation" novalidate method="post">
             <div asp-validation-summary="All" class="text-dark"></div>
             <div class="col-12">
                 <label asp-for="Email" class="form-label">Email</label>

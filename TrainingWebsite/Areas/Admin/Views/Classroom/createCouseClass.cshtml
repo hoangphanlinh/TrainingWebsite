@@ -1,0 +1,74 @@
+﻿@*@model TrainingWebsite.ViewModels.createCourseClassViewModel
+@{
+    ViewData["Title"] = "createCouseClass";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <nav>
+        <h1>Add Course<b>In Classroom</b></h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Classroom")">Classroom List</a></li>
+            <li class="breadcrumb-item active">Add Course</li>
+        </ol>
+    </nav>
+</div> End Page Title 
+<br />
+<div class="row" style="line-height:30px">
+    <div class="col-md-8">
+        <form method ="post">
+            <div asp-validation-summary="All" class="text-danger"></div>-->
+            <div class="form-group">
+                <label>ClassID</label>
+                <input asp-for="@ViewData["Id"]" />
+             </div>
+                <br />
+                <div class="form-group">
+                    <table id="dtBasicExample" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            @{ for (int i = 0; i < Model.AvaliableCourse.Count(); i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input asp-for="@@classID" value="@ViewBag.Id" type="hidden" />
+
+                                        </td>
+                                        <td>
+                                            @Model.AvaliableCourse[i].courseID
+                                        </td>
+                                        <td>
+                                            @Model.AvaliableCourse[i].courseName
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="ISEnroled" id=@string.Format("ISEnroled" + Model.AvaliableCourse[i].IsSelected) class="css-checkbox9 all_check " value="@Model.AvaliableCourse[i].IsSelected" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <button type="submit" value="Create" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index" class="bi-arrow-left-circle-fill">Back to List</a>
+</div>
+<script>
+    $("#ISEnroled").click(function () {
+    var isChecked = document.getElementById('ISEnroled').checked;
+    $("#hdnIsEnroll").val(IsSelected);
+});
+</script>*@
+

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,8 @@ using TrainingWebsite.Models;
 namespace TrainingWebsite.Areas.Trainer.Controllers
 {
     [Area("Trainer")]
+    [Authorize(Roles = "Trainer")]
+
     public class TopicController : Controller
     {
         private readonly ApplicationDbContext data;
@@ -24,12 +27,12 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             this.data = _data;
             this.WebHostEnvironment = WebHostEnvironment;
         }
-       [HttpGet]
+        [HttpGet]
         public IActionResult Index(int id)
         {
             ViewBag.sessionID = id;
 
-            ViewBag.courseName = (from course in data.Courses where course.ID == id select course.TenKhoaHoc).SingleOrDefault();
+            ViewBag.courseName = (from course in data.Courses where course.courseID == id select course.TenKhoaHoc).SingleOrDefault();
 
             var session = (from s in data.Topic
                            where s.IDKhoaHoc == id
@@ -38,12 +41,12 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                                ID = s.IDChuDe,
                                TenChuDe = s.TenChuDe,
                                NoiDung = s.NoiDung
-                               
+
                            }).ToList();
 
             return View(session);
         }
-       
+
         public IActionResult CreateTopic(int id)
         {
             ViewBag.ID = id;
@@ -52,7 +55,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
         }
         [HttpPost]
         [RequestFormLimits(MultipartBodyLengthLimit = 104857600)] //Gioi han file tai len 50MB
-        public async Task<IActionResult> CreateTopic(CreateTopicViewModel model,int id)
+        public async Task<IActionResult> CreateTopic(CreateTopicViewModel model, int id)
         {
             try
             {
@@ -123,7 +126,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.mess = $"{ex.Message}";
             }
@@ -135,7 +138,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             var topic = await data.Topic.SingleOrDefaultAsync(m => m.IDChuDe == id);
             data.Topic.Remove(topic);
             await data.SaveChangesAsync();
-            return RedirectToAction("Index", "Topic", new { id = topic.IDKhoaHoc});
+            return RedirectToAction("Index", "Topic", new { id = topic.IDKhoaHoc });
 
         }
         public async Task<IActionResult> EditTopic(int id)

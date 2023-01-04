@@ -13,7 +13,7 @@ using TrainingWebsite.Data;
 namespace TrainingWebsite.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    //[Authorize(Roles ="Manager")]
+    [Authorize(Roles = "Manager")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -28,7 +28,7 @@ namespace TrainingWebsite.Areas.Manager.Controllers
         }
         //-------------USER MANAGE------------//
         [HttpGet]
-        public async Task<IActionResult> ListUsersAsync(string searchString,string currentFilter, int? pageNumber)
+        public async Task<IActionResult> ListUsersAsync(string searchString, string currentFilter, int? pageNumber)
         {
             if (searchString != null)
             {
@@ -141,7 +141,7 @@ namespace TrainingWebsite.Areas.Manager.Controllers
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
-            if(role == null)
+            if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with ID = {id} cannot be found";
                 return View("Not Found");
@@ -152,12 +152,12 @@ namespace TrainingWebsite.Areas.Manager.Controllers
                 RoleName = role.Name
             };
             //Retrieve all the Users
-            foreach(var user in userManager.Users)
+            foreach (var user in userManager.Users)
             {
                 // If the user is in this role, add the username to
                 // Users property of EditRoleViewModel. This model
                 // object is then passed to the view for display
-                if(await userManager.IsInRoleAsync(user, role.Name))
+                if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
@@ -168,7 +168,7 @@ namespace TrainingWebsite.Areas.Manager.Controllers
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             var role = await roleManager.FindByIdAsync(model.Id);
-            if(role == null)
+            if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with ID = {model.Id} cannot be found";
                 return View("Not Found");
@@ -183,7 +183,8 @@ namespace TrainingWebsite.Areas.Manager.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                foreach(var error in result.Errors){
+                foreach (var error in result.Errors)
+                {
                     ModelState.AddModelError("", error.Description);
                 }
                 return View(model);
@@ -285,9 +286,9 @@ namespace TrainingWebsite.Areas.Manager.Controllers
 
                 if (result.Succeeded)
                 {
-                    
+
                     return RedirectToAction("Index");
-                    
+
                 }
 
                 foreach (var error in result.Errors)

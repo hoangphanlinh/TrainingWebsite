@@ -1,0 +1,112 @@
+﻿@model TrainingWebsite.ViewModels.ClassesViewModel
+
+@{
+    ViewData["Title"] = "EditCourseIntoClass";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>EditCourseIntoClass</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditCourseIntoClass" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="classID" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="startDate" class="control-label"></label>
+                <input asp-for="startDate" class="form-control" />
+                <span asp-validation-for="startDate" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="endDate" class="control-label"></label>
+                <input asp-for="endDate" class="form-control" />
+                <span asp-validation-for="endDate" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Image</label>
+                <img src="~/images/@Model.Image" width="80" height="80" class="change_edit" />
+                <input type="file" asp-for="Image" class="form-control changeImage" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdminID" class="control-label"></label>
+                <input asp-for="@ViewData["AdminID"]" class="form-control" hidden />
+                <span asp-validation-for="AdminID" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Courses, new { @class = "control-label col-md-2" })
+                <table id="dtBasicExample" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ten Khoa Hoc</th>
+                            <th>Checked</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        @for (int i = 0; i < Model.Courses.Count(); i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => model.Courses[i].courseID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => Model.Courses[i].courseName)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => Model.Courses[i].IsSelected)
+
+                                </td>
+                                @Html.HiddenFor(model => model.Courses[i].courseID)
+                                @Html.HiddenFor(model => model.Courses[i].courseName)
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script type="text/javascript">
+
+        $(function(){
+          $('.changeImage').change(function(){
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg"))
+             {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                   $('.change_edit').attr('src', e.target.result);
+                }
+               reader.readAsDataURL(input.files[0]);
+            }
+            else
+            {
+                $('.change_edit').attr('src', '/images/@Model.Image');
+            }
+          });
+
+        });
+</script>
+

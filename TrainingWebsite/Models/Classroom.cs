@@ -10,18 +10,22 @@ namespace TrainingWebsite.Models
 {
     public class Classroom
     {
+      
         [Key]
-        public int ID { get; set; }
+        public int classID { get; set; }
         public string Name { get; set; }
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public string startDate { get; set; }
+        [DataType(DataType.Date)]
+
         public string endDate { get; set; }
-        [ForeignKey("course")]
-        public int CourseID { get; set; }
-        public Course course { get; set; }
+        public string Image { get; set; }
         [ForeignKey("Admin")]
         public string AdminID { get; set; }
         public ApplicationUser Admin { get; set; }
+
+        public List<CourseClassroom> CourseClassroom { get; set; }
+
 
     }
 }
