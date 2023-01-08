@@ -1,4 +1,4 @@
-# TrainingWebsite
+# Training Website
 DATH:
 Xay dung website training system sử dụng .NET CORE MVC + MSSQL.
 Cac chuc nang cua he thong:
