@@ -192,10 +192,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Trainer\Data\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\taiLieus\" />
     <Folder Include="wwwroot\Video\" />
   </ItemGroup>
 

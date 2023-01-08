@@ -208,11 +208,13 @@ namespace TrainingWebsite.Areas.Admin.Controllers
                             }
                         }
                     }
+
                     Myclass.Name = classroom.Name;
                     Myclass.startDate = classroom.startDate;
                     Myclass.endDate = classroom.endDate;
                     Myclass.AdminID = ID;
                     Myclass.Image = uniuefilename;
+
                     foreach (var item in dbContext.CourseClassrooms)
                     {
                         if (item.classID == classroom.classID)

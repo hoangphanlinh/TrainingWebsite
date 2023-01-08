@@ -24,8 +24,44 @@ namespace TrainingWebsite.Data
         public DbSet<ChuDe> Topic { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<CourseClassroom> CourseClassrooms { get; set; }
+        public DbSet<TraineeCourse> CourseTrainees { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Result> Results { get; set; }
+        public DbSet<TaiLieu> TaiLieus { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Reply> Replies { get; set; }
+        public DbSet<BaiTap> BaiTaps{ get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Result>()
+               .HasKey(e => new { e.ExamID, e.TraineeID });
+
+            builder.Entity<Result>()
+                .HasOne(x => x.trainee)
+                .WithMany(x => x.Results)
+                .HasForeignKey(x => x.TraineeID);
+
+            builder.Entity<Result>()
+                .HasOne(x => x.Exam)
+                .WithMany(x => x.Results)
+                .HasForeignKey(x => x.ExamID);
+
+            builder.Entity<TraineeCourse>()
+               .HasKey(e => new { e.CourseID, e.TraineeID});
+
+            builder.Entity<TraineeCourse>()
+                .HasOne(x => x.course)
+                .WithMany(x => x.CourseTrainee)
+                .HasForeignKey(x => x.CourseID);
+
+            builder.Entity<TraineeCourse>()
+                .HasOne(x => x.trainee)
+                .WithMany(x => x.CourseTrainee)
+                .HasForeignKey(x => x.TraineeID);
+
+
             builder.Entity<CourseClassroom>()
                 .HasKey(e => new { e.courseID, e.classID });
 

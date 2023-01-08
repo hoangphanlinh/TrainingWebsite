@@ -2,6 +2,39 @@
 @using TrainingWebsite.Areas.Identity.Data
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+<style>
+    .dropbtn {
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .show {
+        display: block;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="~/assets/styles/main_styles.css">
+
 <div class="top_bar_login ml-auto">
     <ul>
         @if (SignInManager.IsSignedIn(User))
@@ -13,7 +46,11 @@
                 }
             </li>
             <li>
-                <a class="btn btn-default btn-small btn-nav text-white" style="font-weight:600;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+                <a onclick="myFunction()" class="dropbtn btn btn-default btn-small btn-nav text-white" style="font-weight:600;" title="Manage">Hello @User.Identity.Name!</a>
+                <div class="dropdown-content" id="myDropdown">
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index">Setting Account</a>
+                    <a asp-area="" asp-action="Index" asp-controller="Dashboard">Dashboard</a>
+                </div>
             </li>
             <li>
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -32,4 +69,20 @@
         }
     </ul>
 </div>
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (e) {
+        if (!e.target.matches('.dropbtn')) {
+            var myDropdown = document.getElementById("myDropdown");
+            if (myDropdown.classList.contains('show')) {
+                myDropdown.classList.remove('show');
+            }
+        }
+    }
+</script>

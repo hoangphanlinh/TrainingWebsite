@@ -69,7 +69,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             [DataType(DataType.Text)]
             [Display(Name = "Job Position")]
             public int? OccuptionID { get; set; }
-
+            public string role { get; set; } = "Trainee";
 
 
 
@@ -86,7 +86,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             var datebirth = user.BirthDate;
             var level = user.LevelID;
             var occuption = user.OccuptionID;
-
+            var role = user.role;
             var LevelList = (from level1 in _dataContext.Levels
                              select new SelectListItem()
                              {
@@ -129,7 +129,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
                 DateBirth = datebirth,
                 LevelID = level,
                 OccuptionID = occuption,
-
+                role = role
             };
         }
 
@@ -206,6 +206,7 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             var datebirth = user.BirthDate;
             var level = user.LevelID;
             var occuption = user.OccuptionID;
+            var role = user.role;
             if (Input.FullName != fullName)
             {
                 user.FullName = Input.FullName;
@@ -229,6 +230,11 @@ namespace TrainingWebsite.Areas.Identity.Pages.Account.Manage
             if (Input.OccuptionID != occuption)
             {
                 user.OccuptionID = Input.OccuptionID;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Input.role != role)
+            {
+                user.role = Input.role;
                 await _userManager.UpdateAsync(user);
             }
 

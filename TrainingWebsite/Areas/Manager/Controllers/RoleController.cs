@@ -13,7 +13,7 @@ using TrainingWebsite.Data;
 namespace TrainingWebsite.Areas.Manager.Controllers
 {
     [Area("Manager")]
-    [Authorize(Roles = "Manager")]
+    [Authorize(Roles = "Manager,Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -28,7 +28,7 @@ namespace TrainingWebsite.Areas.Manager.Controllers
         }
         //-------------USER MANAGE------------//
         [HttpGet]
-        public async Task<IActionResult> ListUsersAsync(string searchString, string currentFilter, int? pageNumber)
+        public async Task<IActionResult> ListUsers(string searchString, string currentFilter, int? pageNumber)
         {
             if (searchString != null)
             {

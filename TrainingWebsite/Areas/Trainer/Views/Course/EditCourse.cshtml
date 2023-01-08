@@ -22,8 +22,9 @@
     </nav>
 </div><!-- End Page Title -->
 
-<form method="post" asp-action="EditCourse" asp-controller="Course" enctype="multipart/form-data">
+<form asp-action="EditCourse" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="courseID" type="hidden"/>
     <div class="form-group">
         <label asp-for="IDTrainer">ID Trainer</label>
         <input type="text" class="form-control" id="inputEmail4" asp-for="@ViewData["TrainerId"]" disabled>

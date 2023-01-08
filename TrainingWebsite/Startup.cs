@@ -149,7 +149,10 @@ namespace TrainingWebsite
                 name: "Trainer",
                 template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+               
+
             });
+          
 
             app.UseEndpoints(endpoints =>
             {

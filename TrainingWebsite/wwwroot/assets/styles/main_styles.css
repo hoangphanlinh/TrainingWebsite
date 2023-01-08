@@ -1824,14 +1824,12 @@ section
 14. Footer
 *********************************/
 
-.footer
-{
+.footer {
 	display: block;
-	position: relative;
+	position: sticky;
 	width: 100%;
 	background: #1e2434;
 	padding-top: 94px;
-	
 }
 .footer_background {
 	position: absolute;

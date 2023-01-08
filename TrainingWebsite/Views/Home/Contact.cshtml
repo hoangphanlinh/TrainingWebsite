@@ -3,6 +3,7 @@
     ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="~/assets/styles/main_styles.css">
 
 <link rel="stylesheet" type="text/css" href="~/assets/styles/contact.css">
 <link rel="stylesheet" type="text/css" href="~/assets/styles/contact_responsive.css">
@@ -45,10 +46,10 @@
                             {
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     @ViewBag.Message
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             }
                             <div>
                                 <div class="form_title">Name</div>
@@ -61,20 +62,25 @@
                                 <span class="text-dark" asp-validation-for="@Model.Email"></span>
                             </div>
                             <div>
+                                <div class="form_title">Phone Number</div>
+                                <input type="text" class="comment_input" asp-for="@Model.PhoneNumber">
+                                <span class="text-dark" asp-validation-for="@Model.PhoneNumber"></span>
+                            </div>
+                            <div>
                                 <div class="form_title">Subject</div>
                                 <input type="text" class="comment_input" asp-for="@Model.Subject">
                                 <span class="text-dark" asp-validation-for="@Model.Subject"></span>
                             </div>
                             <div>
                                 <div class="form_title">Message</div>
-                                <textarea class="comment_input comment_textarea" asp-for="@Model.Message"></textarea>
+                                <textarea class="comment_input comment_textarea" asp-for="@Model.Message" placeholder="Ghi ten khoa hoc va yeu cau khac..."></textarea>
                                 <span class="text-dark" asp-validation-for="@Model.Message"></span>
 
                             </div>
                             <div>
                                 <button type="submit" class="comment_button trans_200">Send</button>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -94,14 +100,7 @@
                                 <li>info.deercreative@gmail.com</li>
                             </ul>
                         </div>
-                        @*<div class="contact_info_location">
-                                <div class="contact_info_location_title">Australia Office</div>
-                                <ul class="location_list">
-                                    <li>Forrest Ray, 191-103 Integer Rd, Corona Australia</li>
-                                    <li>1-234-567-89011</li>
-                                    <li>info.deercreative@gmail.com</li>
-                                </ul>
-                            </div>*@
+
                     </div>
                 </div>
             </div>
@@ -109,34 +108,7 @@
     </div>
 </div>
 
-<!-- Newsletter -->
 
-<div class="newsletter">
-    <div class="newsletter_background" style="background-image:url(../../assets/images/newsletter_background.jpg)"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="newsletter_container d-flex flex-lg-row flex-column align-items-center justify-content-start">
-
-                    <!-- Newsletter Content -->
-                    <div class="newsletter_content text-lg-left text-center">
-                        <div class="newsletter_title">sign up for news and offers</div>
-                        <div class="newsletter_subtitle">Subcribe to lastest smartphones news & great deals we offer</div>
-                    </div>
-
-                    <!-- Newsletter Form -->
-                    <div class="newsletter_form_container ml-lg-auto">
-                        <form action="#" id="newsletter_form" class="newsletter_form d-flex flex-row align-items-center justify-content-center">
-                            <input type="email" class="newsletter_input" placeholder="Your Email" required="required">
-                            <button type="submit" class="newsletter_button">subscribe</button>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
 <script src="~/assets/plugins/marker_with_label/marker_with_label.js"></script>
 <script src="~/assets/js/contact.js"></script>

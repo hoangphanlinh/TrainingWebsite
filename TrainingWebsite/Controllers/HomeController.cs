@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
-using TrainingWebsite.Areas.Identity.Data;
-using TrainingWebsite.Data;
 using TrainingWebsite.Models;
 using TrainingWebsite.ViewModels;
 
@@ -64,7 +59,7 @@ namespace TrainingWebsite.Controllers
                 using (MailMessage mm = new MailMessage(model.Email, ToAddress))
                 {
                     mm.Subject = model.Subject;
-                    mm.Body = "Name: " + model.Name + "<br /><br />Email: " + model.Email + "<br />" + model.Message;
+                    mm.Body = "Name: " + model.Name + "<br /><br />Email: " + model.Email + "<br /><br />Email: " + model.PhoneNumber + "<br />" + model.Message;
                     mm.IsBodyHtml = true;
 
                     //Dinh kem file
@@ -94,6 +89,8 @@ namespace TrainingWebsite.Controllers
             }
             return View();
         }
+        
+       
         public IActionResult About()
         {
             return View();

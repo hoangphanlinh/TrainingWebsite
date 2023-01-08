@@ -17,7 +17,7 @@
 
     @if (Model.Any())
     {
-        <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateTopic" asp-route-id="@ViewBag.sessionID"
+        <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateTopic" asp-route-id="@ViewBag.courseID"
            asp-controller="Topic">Add Session</a>
 
         foreach (var session in Model)
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@session.TenChuDe</h5>
                    
-                        <video id="videoplayer" style="width:600px;height:300px; object-fit:cover" src="@Url.Content("~/Video/" + @session.NoiDung)" controls loop></video>
+                        @*<video id="videoplayer" style="width:600px;height:300px; object-fit:cover" src="@Url.Content("~/Video/" + @session.NoiDung)" controls loop></video>*@
 
                          @*<iframe width="560" height="315" src="https://www.youtube.com/embed/@session.NoiDung" title="YouTube video player" 
                                  frameborder="0" 
@@ -41,8 +41,7 @@
                 </div>
                 <div class="card-footer">
                     <form asp-action="DeleteTopic" asp-route-id="@session.ID">
-                        <a asp-controller="Topic" asp-action="EditTopic"
-                           asp-route-id="@session.ID" class="btn btn-primary">
+                        <a href="@Url.Action("EditTopic","Topic",new { id=session.ID, courseID= ViewBag.courseID})" class="btn btn-primary">
                             Edit
                         </a>
                         <button type="submit" class="btn btn-danger">
@@ -65,7 +64,7 @@
                     Use the button below to create a session
                 </h5>
                 <a class="btn btn-primary" style="width:auto"
-                   asp-controller="Topic" asp-action="CreateTopic" asp-route-id="@ViewBag.sessionID">
+                   asp-controller="Topic" asp-action="CreateTopic" asp-route-id="@ViewBag.courseID">
                     Create Session
                 </a>
             </div>

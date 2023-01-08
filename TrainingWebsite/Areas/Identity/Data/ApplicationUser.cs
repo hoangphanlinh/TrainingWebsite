@@ -23,7 +23,7 @@ namespace TrainingWebsite.Areas.Identity.Data
         public DateTime BirthDate { get; set; }
         [PersonalData]
         public byte[] Image { get; set; }
-
+         
         [PersonalData]
         [ForeignKey("Occuption")]
 
@@ -34,7 +34,9 @@ namespace TrainingWebsite.Areas.Identity.Data
         [ForeignKey("Level")]
         public Nullable<int> LevelID { get; set; } = 9;
         public Level Level { get; set; }
-
+        public string role { get; set; } = "Trainee";
+        public List<TraineeCourse> CourseTrainee{ get; set; }
+        public List<Result> Results { get; set; }
 
 
     }

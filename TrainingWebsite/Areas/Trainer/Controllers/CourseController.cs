@@ -39,6 +39,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string searchString, string currentFilter, int? pageNumber)
         {
+            ModelState.Remove("id");
             var trainerId = _userManager.GetUserId(HttpContext.User);
 
             if (trainerId == null)
@@ -103,7 +104,7 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             });
             ViewData["ListOfOccuption"] = OccuptionList;
         }
-
+        [HttpGet]
         public IActionResult AddCourse()
         {
 
@@ -162,33 +163,31 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             OccuptionDropDownList();
             return View(model);
         }
+        [HttpGet]
         public async Task<IActionResult> EditCourse(int id)
         {
             var trainerId = _userManager.GetUserId(HttpContext.User);
-            ViewBag.TrainerId = trainerId;
+            ViewData["TrainerId"] = trainerId;
 
-            var course = await data.Courses.SingleOrDefaultAsync(m => m.courseID == id);
+            var course = await data.Courses.Where(x => x.courseID == id).FirstOrDefaultAsync();
             if (course == null)
             {
                 return NotFound();
             }
-
             OccuptionDropDownList();
 
             return View(course);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCourse(int id, Course _course)
+        public async Task<IActionResult> EditCourse(Course _course)
         {
             var trainerId = _userManager.GetUserId(HttpContext.User);
-            ViewBag.TrainerId = trainerId;
-
+            ViewData["TrainerId"] = trainerId;
             if (ModelState.IsValid)
             {
-                var course = await data.Courses.SingleOrDefaultAsync(m => m.courseID == id);
-
-                string uniuefilename = string.Empty;
+                Course course = data.Courses.Where(p => p.courseID == _course.courseID).FirstOrDefault();
+                string uniuefilename = course.ImageTrainer;
                 var files = HttpContext.Request.Form.Files;
                 foreach (var Image in files)
                 {
@@ -210,13 +209,15 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
                         }
                     }
                 }
-                course.courseID = id;
                 course.MaKhoaHoc = _course.MaKhoaHoc;
                 course.TenKhoaHoc = _course.TenKhoaHoc;
                 course.ThoiLuongKhoaHoc = _course.ThoiLuongKhoaHoc;
                 course.MucTieuKhoaHoc = _course.MucTieuKhoaHoc;
                 course.HinhThucDanhGia = _course.HinhThucDanhGia;
-                course.JobPos = _course.JobPos;
+                course.IDTrainer = trainerId;
+                course.ImageTrainer = uniuefilename;
+                course.IDJobPos = _course.IDJobPos;
+               
                 await data.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
@@ -225,11 +226,14 @@ namespace TrainingWebsite.Areas.Trainer.Controllers
             OccuptionDropDownList();
             return View();
         }
-
+        
         public async Task<IActionResult> DeleteCourse(int id)
         {
             var course = await data.Courses.SingleOrDefaultAsync(m => m.courseID == id);
+            //var courseTrainee = await data.CourseTrainees.SingleOrDefaultAsync(m => m.CourseID == id);
+
             data.Courses.Remove(course);
+            
             await data.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -73,7 +73,7 @@
                         </select>
 
 
-                        <input type="submit" class="courses_search_button ml-auto" value="Search Now"/>
+                        <input type="submit" class="courses_search_button ml-auto" value="Search Now" />
                     </form>
                 </div>
                 <div class="courses_container">
@@ -112,15 +112,15 @@
                                 @Html.Hidden("page", (object)ViewBag.Page)
                                 @Html.Hidden("txtSearch", (object)ViewBag.txtSearch)
                                 @Html.Hidden("JobPosID", (object)ViewBag.JobPosID)
-                                @Html.Hidden("ApartmentID",(object)ViewBag.ApartID)
+                                @Html.Hidden("ApartmentID", (object)ViewBag.ApartID)
                             }
                         </div>
                         <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
                             Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
                         </div>
                     </div>
-                    <br/>
-                    @Html.PagedListPager(Model, page => Url.Action("Index","Course", new { page, size = ViewBag.CurrentSize, txtSearch = ViewBag.txtSearch, JobPosID = ViewBag.JobPosID, ApartmentID= ViewBag.ApartID}),X.PagedList.Web.Common.PagedListRenderOptions.Classic)
+                    <br />
+                    @Html.PagedListPager(Model, page => Url.Action("Index", "Course", new { page, size = ViewBag.CurrentSize, txtSearch = ViewBag.txtSearch, JobPosID = ViewBag.JobPosID, ApartmentID = ViewBag.ApartID }), X.PagedList.Web.Common.PagedListRenderOptions.Classic)
                     <!-- Kết thúc -->
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 <div class="sidebar">
                     <!--Categories-->
                     <partial name="~/Views/Shared/GetJobPos.cshtml" />
-                 
+
                 </div>
             </div>
         </div>
