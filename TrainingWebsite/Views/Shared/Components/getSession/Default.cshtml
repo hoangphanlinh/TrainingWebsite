@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TrainingWebsite.ViewModels.CourseDetailViewModel>
+
+<div class="tab_panel tab_panel_2">
+    <div class="tab_panel_content">
+
+        <div class="tab_panel_content">
+
+
+            @*Dropdowns*@
+            <ul class="dropdowns">
+                @foreach(var item in Model)
+                {
+                    <li class="has_children">
+                        <div class="dropdown_item">
+                            <div class="dropdown_item_title"><span>@item.topicName</span></div>
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="dropdown_item">
+                                    <div class="dropdown_item_text">
+                                        <p>@item.Noidung</p>
+                                    </div>
+                                    <div>
+                                        <a href="#">View</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>

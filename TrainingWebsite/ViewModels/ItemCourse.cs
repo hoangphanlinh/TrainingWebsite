@@ -134,6 +134,23 @@ namespace TrainingWebsite.ViewModels
             });
             return new SelectList(LevelList, "Value", "Text");
         }
+        public IEnumerable<SelectListItem> LevelStringDropDown()
+        {
+            var LevelList = (from s in data.Levels
+                             select new SelectListItem()
+                             {
+                                 Text = s.LevelName,
+                                 Value = s.LevelName
+
+
+                             }).ToList();
+            LevelList.Insert(0, new SelectListItem()
+            {
+                Text = "-----Level-----",
+                Value = string.Empty
+            });
+            return new SelectList(LevelList, "Value", "Text");
+        }
         public IEnumerable<SelectListItem> ApartmentDropDown()
         {
             var ApartList = (from s in data.Apartments
@@ -212,9 +229,25 @@ namespace TrainingWebsite.ViewModels
                          select new CourseDetailViewModel
                          {
                              ThoiLuongKH = c.ThoiLuongKhoaHoc,
+                             MucTieuKH = c.MucTieuKhoaHoc,
+                             HinhThucDanhGia = c.HinhThucDanhGia,
+                             TenKhoaHoc = c.TenKhoaHoc
                          });
             return model;
         }
+        public IEnumerable<CourseDetailViewModel> GetListTopic(int id)
+        {
+            var TopicList = (from t in data.Topic
+                                   where t.IDKhoaHoc == id
+                                   select new CourseDetailViewModel()
+                                   {
+                                       topicID = t.IDChuDe,
+                                       topicName = t.TenChuDe,
+                                       Noidung = t.NoiDung
+                                   }).ToList();
+            return TopicList;
+        }
+       
         public IEnumerable<CourseDetailViewModel> TeacherFeatureDDetail(int id)
         {
             var model = (from u in data.Users
@@ -269,6 +302,7 @@ namespace TrainingWebsite.ViewModels
                                 join u in data.Users on level.ID equals u.LevelID
                                 join o in data.Occuptions on u.OccuptionID equals o.OccuptionID
                                 join a in data.Apartments on o.ApartmentID equals a.ApartmentID
+                                where u.role == "Trainee"
                                 select new EmployeeListViewModel
                                 {
                                     Id = u.Id,
@@ -281,7 +315,8 @@ namespace TrainingWebsite.ViewModels
                                     LevelName = level.LevelName,
                                     LevelID = level.ID,
                                     OccuptionID = o.OccuptionID,
-                                    ApartID = a.ApartmentID
+                                    ApartID = a.ApartmentID,
+                                    Email = u.Email
 
                                 });
             return employeeList;
@@ -349,6 +384,8 @@ namespace TrainingWebsite.ViewModels
             data.Classrooms.Add(classroom);
             data.SaveChanges();
         }
+       
+
 
     }
 }

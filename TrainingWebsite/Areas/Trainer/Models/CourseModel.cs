@@ -31,7 +31,6 @@ namespace TrainingWebsite.Areas.Trainer.Models
         public string MucTieuKhoaHoc { get; set; }
         [Required]
         public string HinhThucDanhGia { get; set; }
-        public int? IDKhoaHocTienQuyet { get; set; }
 
         public string IDTrainer { get; set; }
         public string ImageTrainer { get; set; }

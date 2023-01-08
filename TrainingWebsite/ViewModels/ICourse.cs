@@ -30,6 +30,7 @@ namespace TrainingWebsite.ViewModels
         //int getCountCourse();
         IEnumerable<CourseDetailViewModel> GetCourseDetail(int id);
         IEnumerable<CourseDetailViewModel> CourseFeatureDDetail(int id);
+        IEnumerable<CourseDetailViewModel> GetListTopic(int id);
         IEnumerable<CourseDetailViewModel> TeacherFeatureDDetail(int id);
         IEnumerable<CourseDetailViewModel> getLatestCourse(int id);
         IEnumerable<CourseHomeViewModel> getCourseInAdmin();
@@ -40,7 +41,8 @@ namespace TrainingWebsite.ViewModels
         IEnumerable<profileViewModel> getProfileImage(string Id);
         IEnumerable<ListClassroomViewModel> getListClassroom(string Id);
         void addClassroom(string unifile, string Id,createClassViewModel model);
-        
+        IEnumerable<SelectListItem> LevelStringDropDown();
+
     }
 
 }

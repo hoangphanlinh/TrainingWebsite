@@ -30,6 +30,8 @@ namespace TrainingWebsite.Models
 
 
         public List<CourseClassroom> CourseClassroom { get; set; }
+        public List<TraineeCourse> CourseTrainee { get; set; }
+
 
     }
 }

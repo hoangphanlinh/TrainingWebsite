@@ -7,6 +7,7 @@ using TrainingWebsite.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TrainingWebsite.Areas.Identity.Data;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace TrainingWebsite.ViewModels
 {
@@ -56,7 +57,17 @@ namespace TrainingWebsite.ViewModels
         public string HinhThucDanhGia { get; set; }
         public string ApartName { get; set; }
         public int CountEnroll { get; set; }
+        public int topicID { get; set; }
+        public string topicName { get; set; }
+        public string Noidung { get; set; }
 
+        public List<TopicListViewModel> TopicList { get; set; } 
+    }
+    public class TopicListViewModel
+    {
+        public int topicID { get; set; }
+        public string topicName { get; set; }
+        public string Noidung { get; set; }
     }
    public class EmployeeListViewModel
     {
@@ -71,6 +82,7 @@ namespace TrainingWebsite.ViewModels
         public int OccuptionID { get; set; }
         public int LevelID { get; set; }
         public int ApartID { get; set; }
+        public string Email { get; set; }
     }
     public class profileViewModel
     {
@@ -142,5 +154,110 @@ namespace TrainingWebsite.ViewModels
         public int courseID { get; set; }
         public string courseName { get; set; }
         public bool IsSelected { get; set; }
+    }
+    public class TraineeCourseViewModel
+    {
+        public TraineeCourseViewModel()
+        {
+            StatusList = new List<SelectListItem>() {
+            new SelectListItem { Value = "Participating", Text = "Participating" },
+            new SelectListItem { Value = "Complete", Text = "Complete" },
+
+            };
+        }
+        public string Email { get; set; }
+        public string TraineeID { get; set; }
+        public string TraineeLevel { get; set; }
+        [DataType(DataType.DateTime)]
+        public string ErollDate { get; set; }
+        public string Status { get; set; }
+        public string Title { get; set; }
+        public List<SelectListItem> StatusList { get; set; }
+        public List<CourseDetails> CourseList { get; set; }
+        public List<checkBoxViewModel> Courses { get; set; }
+    }
+    public class CourseDetails
+    {
+        public int courseID { get; set; }
+        public string TenKhoaHoc { get; set; }
+        public int classID { get; set; }
+    }
+    public class ChuDeViewModel
+    {
+        public int IDChuDe { get; set; }
+        public string TenChuDe { get; set; }
+        public string NoiDung { get; set; }
+        public int IDKhoaHoc { get; set; }
+    }
+    public class DashboardViewModel
+    {
+       
+       public string TenKhoaHoc { get; set; }
+        public string ImageKH { get; set; }
+        public byte[] ImageTrainer { get; set; }
+        public string JobPosName_Trainer { get; set; }
+        public string JobPosName_Course { get; set; }
+        public int ThoiLuongKH { get; set; }
+        public string MucTieuKH { get; set; }
+        public string HinhThucDanhGia { get; set; }
+        public string ApartName { get; set; }
+        public int CountEnroll { get; set; }
+        public int topicID { get; set; }
+        public string topicName { get; set; }
+        public string Noidung { get; set; }
+        public int courseID { get; set; }
+        public string TraineeID{ get; set; }
+        public string TraineeName{ get; set; }
+
+        public string TraineeLevel { get; set; }
+        [DataType(DataType.DateTime)]
+        public string ErollDate { get; set; }
+        public string Status { get; set; }
+        public string Title { get; set; }
+        public List<TopicListViewModel> topicList { get; set; }
+        public List<Course> CourseList { get; set; }
+    }
+    public class taiLieuViewModel
+    {
+        public int TailieuID { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public int chudeID { get; set; }
+        public List<FileModel> fileList { get; set; }
+        List<IFormFile> file { get; set; }
+    }
+    public class FileModel
+    {
+        public string FileName { get; set; }
+    }
+    public class createTaiLieuViewModel
+    {
+        public int TailieuID { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public int chudeID { get; set; }
+        public List<IFormFile> files { get; set; }
+    }
+    public class createBaiTapViewModel
+    {
+        public int ID { get; set; }
+        public string NoiDung { get; set; }
+        [DataType(DataType.Date)]
+        public string startDate { get; set; }
+        public int courseID { get; set; }
+        public List<IFormFile> files { get; set; }
+    }
+    public class ViewDetailViewModel
+    {
+        public string FileName { get; set; }
+        public string Path { get; set; }
+        public string NoiDung { get; set; }
+        public string CreateDate { get; set; }
+
+    }
+    public class ReplyVM
+    {
+        public string Reply { get; set; }
+        public int CID { get; set; }
     }
 }

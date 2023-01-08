@@ -351,11 +351,12 @@
                         <th>MaKhoaHoc</th>
                         <th>Name</th>
                         <th>ThoiLuongKhoaHoc</th>
-                        <th>MucTieuKhoaHoc</th>
+                        @*<th>MucTieuKhoaHoc</th>*@
                         <th>HinhThucDanhGia</th>
                         <th>IDKhoaHocTienQuyet</th>
                         <th>JobPosName</th>
                         <th>Topic</th>
+                        <th>Bai Tap</th>
                     </tr>
                 </thead>
                 <tbody id="myTable">
@@ -367,12 +368,15 @@
                             <td>@course.MaKhoaHoc</td>
                             <td>@course.Name</td>
                             <td>@course.ThoiLuongKhoaHoc</td>
-                            <td>@course.MucTieuKhoaHoc</td>
+                            @*<td>@course.MucTieuKhoaHoc</td>*@
                             <td>@course.HinhThucDanhGia</td>
                             <td>@course.IDKhoaHocTienQuyet</td>
                             <td>@course.JobPosName</td>
                             <td >
-                                <a asp-action="Index" asp-controller="Topic" asp-route-id="@course.ID" class="edit"><i style="font-size: 30px;" class="material-icons" data-toggle="tooltip" title="Session list">&#xE172;</i></a>
+                                <a asp-action="Index" asp-controller="ChuDes" asp-route-id="@course.ID" class="edit"><i style="font-size: 30px;" class="material-icons" data-toggle="tooltip" title="Session list">&#xE172;</i></a>
+                            </td>
+                            <td>
+                                <a asp-action="Index" asp-controller="BaiTaps" asp-route-id="@course.ID" class="edit"><i style="font-size: 30px;" class="material-icons" data-toggle="tooltip" title="BaiTap List">&#xf88d;</i></a>
                             </td>
                             <td>
                                 <form asp-action="DeleteCourse" asp-route-id="@course.ID">

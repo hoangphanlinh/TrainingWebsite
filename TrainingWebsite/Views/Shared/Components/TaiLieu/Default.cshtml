@@ -1,0 +1,28 @@
+﻿@model IEnumerable<TrainingWebsite.ViewModels.ViewDetailViewModel>
+
+<table id="dtBasicExample" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>FileName</th>
+            <th>Path</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.FileName
+                </td>
+                <td>
+                    @item.Path
+                </td>
+                <td>
+                    @Html.ActionLink("Download", "DowloadFile","Dashboard", new { fileName = item.Path })
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
