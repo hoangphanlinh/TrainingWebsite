@@ -6,7 +6,7 @@ Cac chuc nang cua he thong:
 + Phân quyền.
 + Dang nhap/Dang ky.
 
-**Trainee**
+**Trainee** (Linh@gmail.com / Linh@2)
 + Xem danh sach khoa hoc, chi tiet khóa học(bài giảng, giảng viên, mục đích, list khóa học tương đồng, comment/reply)
 + Tìm kiếm khóa học
 + Enroll khóa học ( bắt buộc send mail cho Admin để đượ đăng ký)
@@ -16,18 +16,18 @@ Cac chuc nang cua he thong:
 + Chức năng nộp bài tập, bài kiểm tra
 + Xem kết quả chi tiết của khóa học.
 
-**Trainer**
+**Trainer**  (Linh@gmail.com / Linh@2)
 + Quản lý khóa học (CRUD).
 + CRUD session cho khóa học
 + CRUD tài liệu/bài tập/ bài kiểm tra cho khóa học.
 + Xem danh sách trainee tham gia khóa học
 + CRUD kết quả của trainee.
 
-**Admin**
+**Admin**  (Linh@gmail.com / Linh@2)
 + Xem danh sách khóa học
 + CRUD lóp học.
 + Accept trainee tham gia khóa học.
 
-**Manager**
+**Manager**  (Manager@gmail.com / Linh@2)
 + Thống kế khóa học ( Tìm kiếm khóa học theo job, apartment, skill)
 + Tìm kiếm trainee theo skill/ theo kết quả đạo tạo.
