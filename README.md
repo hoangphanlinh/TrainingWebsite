@@ -6,7 +6,7 @@ Cac chuc nang cua he thong:
 + Phân quyền.
 + Dang nhap/Dang ky.
 
-**Trainee** (Linh@gmail.com / Linh@2)
+**Trainee** (Linh@gmail.com or trainee@gmail.com / Linh@2)
 + Xem danh sach khoa hoc, chi tiet khóa học(bài giảng, giảng viên, mục đích, list khóa học tương đồng, comment/reply)
 + Tìm kiếm khóa học
 + Enroll khóa học ( bắt buộc send mail cho Admin để đượ đăng ký)
